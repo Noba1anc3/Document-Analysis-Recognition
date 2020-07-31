@@ -1,7 +1,7 @@
 ## LayoutLM: Pre-training of Text and Layout for Document Image Understanding @ KDD 2020
-[Paper Link]()  
+[Paper Link](https://arxiv.org/pdf/1912.13318)  
 [Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/LayoutLM:%20Pre-training%20of%20Text%20and%20Layout%20for%20Document%20Image%20Understanding.md)  
-[Attribution]()
+[Contribution]()
 
 ## Publaynet: Largest Dataset Ever for Document Layout Analysis @ ICDAR 2019 Awards Best Paper Award 
 [Paper Link](https://arxiv.org/pdf/1908.07836)  
