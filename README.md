@@ -13,7 +13,7 @@
 [Implementation](https://github.com/Noba1anc3/MFCNN)  
 [Research & Experimental Documentation](https://github.com/Noba1anc3/MFCNN/wiki/Layout-Analysis)
 
-## Multi-scale Multi-task FCN for Semantic Page Segmentation and Table Detection @ 2017 ICDAR
+## Multi-scale Multi-task FCN for Semantic Page Segmentation and Table Detection @ ICDAR 2017
 [Paper Link](https://arxiv.org/pdf/)  
 [Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/Multi-scale%20Multi-task%20FCN%20for%20Semantic%20Page%20Segmentation%20and%20Table%20Detection.md)
 
