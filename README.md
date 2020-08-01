@@ -17,6 +17,6 @@
 [Paper Link](https://arxiv.org/pdf/)  
 [Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/Multi-scale%20Multi-task%20FCN%20for%20Semantic%20Page%20Segmentation%20and%20Table%20Detection.md)
 
-## CloudScan - A configuration-free invoice analysis system using recurrent neural networks @ ICDAR 2017
+## CloudScan - A configuration-free invoice analysis system using recurrent neural networks @ ICDAR 2018
 [Paper Link](https://arxiv.org/pdf/1708.07403)  
-[Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/CloudScan%20-%20A%20configuration-free%20invoice%20analysis%20system%20using%20recurrent%20neural%20networks%20@%20ICDAR%202017.md)
+[Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/CloudScan%20-%20A%20configuration-free%20invoice%20analysis%20system%20using%20recurrent%20neural%20networks%20@%20ICDAR%202018.md)
