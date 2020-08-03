@@ -1,10 +1,10 @@
 ## 文档理解
 
-![1596418728900](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596418728900.png)
+![1596418728900](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqbW5R1*DATbMs2rMyXVhKuTYJ1JURggHEtf6cGF*vGNAIm2jWo1w791V.CSI3NkdTww4mCrRcrVRVwe803cvDfQ!/b&bo=uwPxAbsD8QEDCSw!&rf=viewer_4)
 
-![1596418889611](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596418889611.png)
+![1596418889611](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrED5Ll.FC4PiT3wCDfGukTwzxU37V8MkItnRj4IkEVlZH1c*r0cTANomT94h5SCzH1gWlmbbixKMdlAfUPpumXDk!/r)
 
-![1596418903848](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596418903848.png)
+![1596418903848]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJdUqzrMaWKZFba.wsx4R9*vWtJEFTS0QCZurf8Hz7Wj13ywuBezLB2vIFs59P2irvF4FTeIpR.dIX.n*S77vcI!/r )
 
 
 
@@ -18,23 +18,23 @@
 
 ​		文档语义分割在学术上尚且没有一个统一的定义，但总体而言都是在解决同一个问题，即在文档图像上的语义分割任务。进一步地，文档语义分割可以分类为OCR前的语义分割和OCR后的语义分割，在此选取两篇论文中的定义来阐述。
 
-![1596420457262](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596420457262.png)
+![1596420457262]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK0sKe8cnyDZUZBs1KWk64OBd5iMFqfGlMS41sRCqxvSi2ZXXarVpNbiuOebb0RXlfjpeOghrKPQQ6J4SMSI7AI!/r )
 
-![1596420468285](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596420468285.png)
+![1596420468285](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrENGrtySjFhQ8TF5UgHj8hIqSzj8RsLRO*cCOzpvtTDRvk8Eri*I3B5siBs6QSGOpq.kkLpTmbHdi8IQQ55ir0ig!/b&bo=SQOMAEkDjAADGTw!&rf=viewer_4)
 
 #### OCR前语义分割
 
 ​		对于OCR前的语义分割，Bukhari 等人在 DAS 2010 中发表的论文的表述如下 : “文档图像的语义分割将文档分割为文字和非文字区域，是文档图像分析任务中提升OCR结果的一个十分重要的预处理步骤”。也就是说，OCR前的语义分割通常将文档图像分割为文字，图片和表格区域。对于分割出的文字部分，可利用相关算法进行文字检测和识别。对于分割出的图片部分，可使用图像分析算法进行解析。对于分割出的表格部分，可使用表格理解算法进行表格理解。
 
-![1596427227229](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596427227229.png)
+![1596427227229](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJ61FQaImMR6n1MlTCfM8QfXVf1u99bSqcpyI9s4FOf.ByrK7EpFQoYEL0rloyUqCMwqbK3QuQJXacDyo6k8FbQ!/r )
 
 #### OCR后语义分割
 
 ​		对于OCR后的语义分割，通常又被称作文档信息抽取，文档版面分析和文档语义结构提取。Yang 等人在 CVPR 2017 中发表的论文的表述如下 : "我们将文档语义结构提取看作一个逐像素的语义分割任务，并提出了一个统一的模型，该模型不同于传统的版面分割任务，仅仅基于视觉来分类像素"。换言之，OCR后的语义分割任务更多的融合了文字的语义信息和上下文信息，可以更好的找到更详尽的语义类型，用于文档的版面分析于信息抽取当中。
 
-![1596436426620](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596436426620.png)
+![1596436426620](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEF58Y*o9EtyL*X6ehd7xV8ntlXxUBywxjc3tLfXLIyDus3tvtZ14T4dOR5kEIJRDPoEX7*49YXjINCev1phYvRE!/r )
 
-![1596436467871](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596436467871.png)
+![1596436467871](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFMtLyATAFC70E*kNS9sWWLulUrFfd03bDi6qjuvg81lLwxkt4mqJ*ncEb2eMZasJRKydfhe*091iPLZrwwxAm0!/r )
 
 ### 文档语义结构提取（Document Semantic Structure Extraction）
 
@@ -62,7 +62,7 @@
 
 ​		CloudScan是一个简单的，免于配置和维护的发票分析系统。其既可以分析见过的模板，也可以分析尚未见过的模板。在该系统当中并没有模板的概念，也不依赖于任何系统集成和先验知识。该方法是学术界第一个可以精确地分析没有见过的模板的发票分析系统，其自动化训练数据的提取思想与远程监督的思想十分接近。
 
-![1596438136989](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596438136989.png)
+![1596438136989](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFORcrL0qDEv9yhfAwOTBCamKeLP6daoZkjKkuyKUrCroxpZROamhtmoXaAmHMH3xhYQPNecJYUe*izOPiPG1UU!/r)
 
 ​		该系统的引擎包含以下六个工作步骤：
 
@@ -90,7 +90,7 @@
 - Semantic Structure Extraction on Deformed Documents via Fully Convolutional Networks.
 - LayoutLM: Pre-training of Text and Layout for Document Image Understanding. KDD, 2020
 
-![1596419779084](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596419779084.png)
+![1596419779084](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEGkTzgIs42v92hurpJuXmPoT7iZU.2ZyD59bsyY1ZeTncziquQQrtu6CqZ.sOWtAjFloZ2nW8s1mL28EzB8o0oc!/r)
 
 逐像素分类的语义分割方法通常
 
@@ -102,11 +102,11 @@
 
 ​		其合成文档的生成效果如下：
 
-![1596437866975](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596437866975.png)
+![1596437866975](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEKDjPSucZE8JONI2rMOydVxepZ6wEPN8GcufoCgAs6f.95jOVhRb1UNc5ppBDbWeeuIS9BrMysQQuIYFkcq.qhM!/r)
 
 ​		MMFCN的网络框架分为语义分割和轮廓检测网络。语义分割网络逐像素预测其概率，轮廓检测网络则预测元素实例的边界。而后，将语义分割和轮廓检测网络输出的特征输入到条件随机场当中，以精确语义分割网络的输出。除此之外，作者基于语义分割的结果，利用了一些启发式规则来提取每个表格实例，并利用一个验证网络来降低假阳率。
 
-![1596437921072](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596437921072.png)
+![1596437921072](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEBMLNilHfB7z*oMFno0HkCRD1rze3J*nkOkUbf2gUnVj6qHgMSCmxXgBzDqIRFxF8Vzfen6n7hGk78.LBluMogI!/r)
 
 ​		作者提出的MMFCN是一个统一的框架，结合了深度学习模型和启发式规则来同时处理语义分割和表格检测两个任务。其中，预测类别和轮廓检测两个任务作为神经网络框架的两个分支同时训练。而对于后面的条件随机场，其一元项由语义分割网络输出的特征来定义，其成对项由色差和轮廓特征来定义。
 
@@ -118,7 +118,7 @@
 
 ​	为了在基于CNN的模型中融合文字信息，作者构建了一个文字嵌入图（Text Embedding Map），把它输送给了MFCNN。更具体地说，对每个句子计算其嵌入表示，将该嵌入映射给该语句所在区域的每一个像素点。
 
-![1596342496828](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596342496828.png)
+![1596342496828]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJe5uH5m2Z*KonVNgdT3rR0M6ggR*9wZ0Hf0muFKILbjrUZjXC3e2OuYYSGaBaDwoBj6ODmzUjapkPj.qqQkUl8!/r )
 
 ​	为了解决训练数据的问题，作者提出了一个有效的合成文档生成方式，并用它生成了大规模的预训练数据。进一步地，作者提出了两个无监督任务用于更好的提升模型泛化性。其中，通过重建原始图像，重建任务有助于学到更好的表征；连续性任务鼓励同一区域的像素拥有相似的表征。
 
@@ -134,15 +134,15 @@
 - Graphical object detection using Mask R-CNN ICDAR, 2019.
 - Table detection using YOLO. ICDAR, 2019.
 
-![1596419804068](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596419804068.png)
+![1596419804068]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFuIMA1KftuWbGVyiqGD1NgKgRj5zXHYB1nnuwxYpisFFFPyL.K5C8v.MP2T.GsMxup7Zq7yOh58BkTrqQW*FF4!/r )
 
 ## 5.数据集
 
 ​		语义分割模型的训练需要庞大的训练数据，从2010年开始陆续出现了若干具有一定规模的语义分割数据集。这些数据集有些专注于表格检测的任务，有些致力于版面分割的任务，近一两年来出现了拥有更多细粒度标签的大规模语义分割数据集，诸如PubLayNet和DocBank。随着时间的推移，数据集的制作方式由人工标注转变为基于规则的弱监督生成，数据集的大小与日俱增，训练出来的语义分割模型也随之越来越强大。这使得基于大规模多领域数据集的语义分割预训练模型的设想成为现实[14]。
 
-![1596436245954](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596436245954.png)
+![1596436245954]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEOzIanVWLWA8mkhyQMEPUgvn5gKq.t7tPStAGLeHhO*UfgY1iL0uGr9yJMtCFvQr48xpDRPFq2HVwnk..0HK5hw!/r )
 
-![1596436155245](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596436155245.png)
+![1596436155245]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrELLAEF2TedUovX52*rJV3X**4ySrGDKO8llKmhOZjzshvhDUgJB6Y9YoCaYfhtg8E6heJiQjzi0Qebm30KoABHU!/r )
 
 ### ICDAR 2013 [16]
 
@@ -156,7 +156,7 @@
 
 ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的简称，每两年举办一次。比赛使用的数据集为PRImA版面分析数据集，由曼彻斯特萨福德大学PRImA实验室提出，包括当代杂志和科学文章之内的扫面页。其主要任务是进行版面分割和区域分类。
 
-![1596451116804](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596451116804.png)
+![1596451116804]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEPPOa0rFR7ADEpP546LN1rIcatM2Upr7*6JeI7GhN2aSi6nUa62sHWCQrVGfv8LfJyCJ4PbpZS.zYTcp1wKmrHQ!/r )
 
 ### cTDAR [18]
 
@@ -174,7 +174,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​		PubLayNet是一个大型文档图像数据集，文档布局同时使用边界框和多边形进行标注。其使用的原始文档是PubMed中心开源数据集，通过自动化对齐PDF解析结果和XML文件来完成对文档的标注。该工作获得了2019年ICDAR的最佳论文奖。
 
-![1596450718853](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596450718853.png)
+![1596450718853]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEF.NhDQK9IhR9XnLv6mfQJntby9xaSmnJQiGyl.Ul6neCXZEqLsjDOUUnjCf3rUh.Yt.svCCpra5GulVf8iaafY!/r )
 
 ### TableBank [11]
 
@@ -185,13 +185,13 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 | Table detection             | 163,417 | 253,817 | 417,234    |
 | Table structure recognition | 56,866  | 88,597  | 145,463    |
 
-![1596442961694](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596442961694.png)
+![1596442961694]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK7YgC7eevq2N3h8WSTG*reaxWRlyh4jGB91NXc1lhrq2TkZgNBZtL.6SLqRr3vUxOYGPvV02.vrny5nN6uz6BI!/r )
 
 ### DocBank [12]
 
 ​		DocBank是由北航，哈工大和微软亚洲研究院联合提出的文档版面分析数据集。与TableBank一样，同样使用弱监督的方法来建立，拥有细粒度的token级标注。该数据集使在下游任务训练的模型可以同时学习到文本的和版面的信息。目前的DocBank包含500K个文档页码，其中400K张用于训练，50K张用于验证，50K张用于测试。
 
-![1596444872518](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596444872518.png)
+![1596444872518]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEHJHm7msFudCMv2M8seHuyEONHlfeE4xZodg382PTNnuEJKg7iPYHE2kVQ34rfW4xlCDDI.Cm0EY9I.nrr.2Nuk!/r )
 
 ​		在文档版面分析任务中，已有一些基于图像的文档版面数据集，而这些数据集大多是针对计算机视觉方法构建的，很难应用于NLP方法。另外，基于图像的数据集主要包括页面图像和大型语义结构的边界框，它们不是细粒度的token级标注。此外，生成人工标记的细粒度token级文本块排列也是耗时和费力的。因此，利用弱监督以最小的努力获得细粒度的标记文档，同时使数据能够易于应用到任意的NLP和计算机视觉方法是至关重要的。
 
