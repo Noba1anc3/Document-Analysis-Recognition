@@ -154,13 +154,62 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 | TableBank       | 417,234 | 1      | ✔            | ✘           | ✔             | ✔           |
 | DocBank         | 500,000 | 12     | ✔            | ✔           | ✔             | ✔           |
 
-## 3.基于自然语言处理的语义分割
+## 3. 评价指标
+
+### Precision - Recall - F1
+
+​		准确率，召回率及其对应的F1分数通常用于基于语义分割的方法，每种语义类别都需要计算这组分数作为该类别的评估指标。这一系列指标可以有两种计算方式，分别是在一定IoU阈值下基于个数的计算和基于面积的计算。前者更关注模型对每一个实体的预测情况，对能否正确预测每个实体比较敏感。相比之下，后者更关注模型的总体表现。
+
+​		根据任务场景和评估角度的不同可以将这组指标分为单词级和实体级。对于OCR前的语义分割，通常只能计算实体级的指标。而对于OCR后的语义分割，由于有文字检测结果的辅助，还可以计算单词级的指标。一般来说，单词级的指标更关注模型的总体表现，而实体级的指标更关注模型对每个语义类型的找准找全情况。
+
+![1596513154629](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqfMqTPnSmdq.h7NVm53LLRLNU1RTMelLJllRtXf9Bemt2sbIOLI69jV46ynSw6Ko2svs6vPTzJJqRaorCR00N3Q!/b&bo=*gY1Av4GNQIDCSw!&rf=viewer_4)
+
+### mAP
+
+​		mAP通常用于基于目标检测的方法，其全称是mean Average Precision。这里的Average Precision是在不同recall下计算得到的。
+
+```text
+                  实                      际
+-----------------------------------------------------
+        |         1           |           0         
+-----------------------------------------------------
+预 |  1  |  TP（True Positive）|   FP（False Positive）
+   --------------------------------------------------
+测 |  0  | FN（False Negative）|   TN（True Negative）
+-----------------------------------------------------
+```
+
+​		准确率，召回率和精度的计算公式如下：
+
+![](https://www.zhihu.com/equation?tex=P%3D%5Cfrac%7BTP%7D%7BTP%2BFP%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%A7%8D%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89)
+
+![](https://www.zhihu.com/equation?tex=R%3D%5Cfrac%7BTP%7D%7BTP%2BFN%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E4%B8%AD%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89)
+
+![](https://www.zhihu.com/equation?tex=accuracy%3D%5Cfrac%7BTP%2BTN%7D%7BTP%2BTN%2BFP%2BFN%7D%EF%BC%8C%EF%BC%88%E9%80%9A%E5%B8%B8%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F%EF%BC%89)
+
+​		Precision度量的是「查准率」，在所有检测出的正样本中是不是实际都为正样本。比如在垃圾邮件判断等场景中，要求有更高的precision，确保放到回收站的都是垃圾邮件。 
+
+​		Recall度量的是「查全率」，所有的正样本是不是都被检测出来了。比如在肿瘤预测场景中，要求模型有更高的recall，不能放过每一个肿瘤。
+
+​		在VOC2010以前，只需要选取当Recall >= 0, 0.1, 0.2, ..., 1共11个点时的Precision最大值，AP即为这11个Precision的平均值。在VOC2010及以后则是计算PR曲线下面积作为AP值。
+
+​		最后，所有种类的平均AP值即为mAP值。
+
+### Pixel-wise IoU
+
+
+
+### Exact Match F1 Score
+
+
+
+## 4. 基于自然语言处理的语义分割
 
 ​		基于自然语言处理的语义分割从属于后OCR的语义分割，其基本思想是将文字识别的结果转化为对应的词嵌入。通过命名实体识别（Named Entity Recognition）或槽填充的方法（Slot Filling）实现对文字区域的细分类。
 
 ​		此时，命名实体的范畴不再是人名，地名，公司名等传统NER当中定义的命名实体，而是与下游任务紧密关联的命名实体。诸如，身份证当中的命名实体是姓名，出生日期，住址，证件有效期等信息。而对于海关报关票据而言则应当是包含有：发送方，接收方，物品名称，物品单价，物品总量等信息。相对应的，以上提及的命名实体在槽填充当中则转变为需要被填充的槽。
 
-### CloudScan - 基于循环神经网络的免配置发票分析系统
+### CloudScan - 基于循环神经网络的免配置发票分析系统 [15]
 
 ​		CloudScan是一个简单的，免于配置和维护的发票分析系统。其既可以分析见过的模板，也可以分析尚未见过的模板。在该系统当中并没有模板的概念，也不依赖于任何系统集成和先验知识。该方法是学术界第一个可以精确地分析没有见过的模板的发票分析系统，其自动化训练数据的提取思想与远程监督的思想十分接近。
 
@@ -182,7 +231,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​		UBL Invoice和 PDF 一同通过GUI提供给用户，用户可以修正结果当中的任何Field。一旦用户修改了任何错误并接受了产出的Invoice，结果UBL 会被加入到系统的数据库当中。分类器利用N-grams和它们的标签来训练。对UBL文档当中每个field，作者考虑所有的N-grams，并检查解析后的文字内容是否和field匹配。通过这样的方式，GUI可以专注于使用户审查和纠正错误。这个系统相比于机器学习需要，更多的专注于用户体验。 
 
-## 4.基于逐像素分类的语义分割
+## 5. 基于逐像素分类的语义分割
 
 - Multi-scale Multi-task FCN for Semantic Page Segmentation and Table Detection. ICDAR, 2017.
 - Learning  to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks. CVPR, 2017.
@@ -196,9 +245,9 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 逐像素分类的语义分割方法通常
 
-### 基于视觉信息的方法
+### 5.1 基于视觉信息的方法
 
-#### Multi-scale Multi-task FCN
+#### Multi-scale Multi-task FCN [16]
 
 ​		在MMFCN当中，作者第一次用一个统一的深度学习框架同时解决语义分割和表格检测的任务，亦是第一次使用深度神经网络来生成实例的边界。此外，作者提出了一个新的合成文档方法，用合成文档训练出的模型在真实文档上取得了不错的结果。
 
@@ -212,9 +261,9 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​		作者提出的MMFCN是一个统一的框架，结合了深度学习模型和启发式规则来同时处理语义分割和表格检测两个任务。其中，预测类别和轮廓检测两个任务作为神经网络框架的两个分支同时训练。而对于后面的条件随机场，其一元项由语义分割网络输出的特征来定义，其成对项由色差和轮廓特征来定义。
 
-### 融合视觉信息与语义信息的方法
+### 5.2 融合视觉信息与语义信息的方法
 
-#### Multimodal FCN
+#### Multimodal FCN [17]
 
 ​	MFCNN以端到端的方式，逐像素同时辨别其基于视觉和语义的类别。它是一个泛化的页面分割模型，可以基于语义功能对文字区域指定特定的标签以进行细粒度的识别。
 
@@ -228,7 +277,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 
 
-## 5.基于目标检测的语义分割
+## 6.基于目标检测的语义分割
 
 - DeepDeSRT: Deep Learning for Detection and Structure Recognition of Tables in Document Images. ICDAR, 2017
 - Fast CNN-based document layout analysis. ICCV, 2017
@@ -238,53 +287,6 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ![1596419804068]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFuIMA1KftuWbGVyiqGD1NgKgRj5zXHYB1nnuwxYpisFFFPyL.K5C8v.MP2T.GsMxup7Zq7yOh58BkTrqQW*FF4!/r )
 
-## 6.评价指标
-
-### Precision - Recall - F1
-
-​		准确率，召回率及其对应的F1分数通常用于基于语义分割的方法，每种语义类别都需要计算这组分数作为该类别的评估指标。这一系列指标可以有两种计算方式，分别是在一定IoU阈值下基于个数的计算和基于面积的计算。前者更关注模型对每一个实体的预测情况，对能否正确预测每个实体比较敏感。相比之下，后者更关注模型的总体表现。
-
-​		根据任务场景和评估角度的不同可以将这组指标分为单词级和实体级。对于OCR前的语义分割，通常只能计算实体级的指标。而对于OCR后的语义分割，由于有文字检测识别结果的辅助，还可以计算单词级的指标。一般来说，单词级的指标更关注模型的总体表现，而实体级的指标更关注模型对每个语义类型的找准找全情况。
-
-![1596513154629](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596513154629.png)
-
-### mAP
-
-​		mAP通常用于基于目标检测的方法，其全称是mean Average Precision。这里的Average Precision是在不同recall下计算得到的。
-
-```text
-                  实                    际
-----------------------------------------------------
-        |         1           |            0              
-----------------------------------------------------
-预 |  1  |  TP（True Positive）|   FP（False Positive） 
-    ------------------------------------------------
-测 |  0  | FN（False Negative）|   TN（True Negative）
-----------------------------------------------------
-```
-
-​		准确率，召回率和精度的计算公式如下：
-
-![](https://www.zhihu.com/equation?tex=P%3D%5Cfrac%7BTP%7D%7BTP%2BFP%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%A7%8D%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89)
-
-![](https://www.zhihu.com/equation?tex=R%3D%5Cfrac%7BTP%7D%7BTP%2BFN%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E4%B8%AD%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89)
-
-![](https://www.zhihu.com/equation?tex=accuracy%3D%5Cfrac%7BTP%2BTN%7D%7BTP%2BTN%2BFP%2BFN%7D%EF%BC%8C%EF%BC%88%E9%80%9A%E5%B8%B8%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F%EF%BC%89)
-
-​		Precision度量的是「查准率」，在所有检测出的正样本中是不是实际都为正样本。比如在垃圾邮件判断等场景中，要求有更高的precision，确保放到回收站的都是垃圾邮件。 
-
-​		Recall度量的是「查全率」，所有的正样本是不是都被检测出来了。比如在肿瘤预测场景中，要求模型有更高的recall，不能放过每一个肿瘤。
-
-​		在VOC2010以前，只需要选取当Recall >= 0, 0.1, 0.2, ..., 1共11个点时的Precision最大值，然后AP就是这11个Precision的平均值。在VOC2010及以后则是计算PR曲线下面积作为AP值。
-
-
-
-### Pixel-wise IoU
-
-
-
-### Exact Match F1 Score
-
 
 
 ## 7.参考文献
@@ -293,19 +295,19 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 [2] https://guillaumejaume.github.io/FUNSD/
 
-[3]  G¨obel, M., Hassan, T., Oro, E. and Orsi, G. - **ICDAR 2013 table competition.** - *12th International Conference on Document Analysis and Recognition*
+[3] G¨obel, M., Hassan, T., Oro, E. and Orsi, G. - **ICDAR 2013 table competition.** - *12th International Conference on Document Analysis and Recognition*
 
-[4]  Gao, L., Yi, X., Jiang, Z., Hao, L. and Tang, Z. - **ICDAR 2017 competition on page object detection.** -*14th International Conference on Document Analysis and Recognition*
+[4] Gao, L., Yi, X., Jiang, Z., Hao, L. and Tang, Z. - **ICDAR 2017 competition on page object detection.** -*14th International Conference on Document Analysis and Recognition*
 
 [5] https://rrc.cvc.uab.es/?ch=13&com=downloads
 
-[6]  https://www.primaresearch.org/RDCL2019/ 
+[6] https://www.primaresearch.org/RDCL2019/ 
 
-[7]  Gao, L., Djean, H., Yan, Q., Kleber, F., Huang, Y., Meunier, J.L. and Fang, Y. - **ICDAR 2019 competition on table detection and recognition (cTDaR).** - *15th International Conference on Document Analysis and Recognition*
+[7] Gao, L., Djean, H., Yan, Q., Kleber, F., Huang, Y., Meunier, J.L. and Fang, Y. - **ICDAR 2019 competition on table detection and recognition (cTDaR).** - *15th International Conference on Document Analysis and Recognition*
 
 [8] http://personal.psu.edu/xuy111/projects/cvpr2017_doc.html
 
-[9]  Fang, J., Tao, X., Tang, Z., Qiu, R. and Liu, Y. - **Dataset, ground-truth and performance metrics for table detection evaluation.** - *IAPR International Workshop on Document Analysis System 2012*
+[9] Fang, J., Tao, X., Tang, Z., Qiu, R. and Liu, Y. - **Dataset, ground-truth and performance metrics for table detection evaluation.** - *IAPR International Workshop on Document Analysis System 2012*
 
 [10] Shahab, A., Shafait, F., Kieninger, T. and Dengel, A. - **An open approach towards the benchmarking of table structure recognition systems.** - *Document Analysis System 2010*
 
@@ -316,4 +318,10 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 [13] Minghao Li, Lei Cui, Shaohan Huang, Furu Wei, Ming Zhou and Zhoujun Li - **TableBank: A Benchmark Dataset for Table Detection and Recognition** - *15th International Conference on Document Analysis and Recognition*
 
 [14] Minghao Li, Yiheng Xu, Lei Cui, Shaohan Huang, Furu Wei, Zhoujun Li and Ming Zhou - **DocBank: A Benchmark Dataset for Document Layout Analysis** - ***[ arXiv:2006.01038](https://arxiv.org/abs/2006.01038)***
+
+[15] Rasmus Berg Palm, Ole Winther and Florian Laws - **CloudScan - A Configuration-Free Invoice Analysis System Using Recurrent Neural Networks** - *14th International Conference on Document Analysis and Recognition*
+
+[16] Dafang He, Scott Cohen, Brian Price, Daniel Kifer and C. Lee Giles - **Multi-Scale Multi-Task FCN for Semantic Page Segmentation and Table Detection** - *14th International Conference on Document Analysis and Recognition*
+
+[17] Xiao Yang, Ersin Yumer, Paul Asente, Mike Kraley, Daniel Kifer and C. Lee Giles - **Learning to Extract Semantic Structure From Documents Using Multimodal Fully Convolutional Neural Networks** -  *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 5315-5324*
 
