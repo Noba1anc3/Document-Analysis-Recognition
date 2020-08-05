@@ -11,8 +11,8 @@
 [Implementation](https://github.com/Noba1anc3/Publaynet)
 
 ## Visual Detection with Context for Document Layout Analysis @ EMNLP 2019
-[Paper Link](https://www.aclweb.org/anthology/D19-1348.pdf)
-[Paper Documentation]()
+[Paper Link](https://www.aclweb.org/anthology/D19-1348.pdf)  
+[Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/Visual%20Detection%20with%20Context%20for%20Document%20Layout%20Analysis.md)
 
 ## Learning to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks @ CVPR 2017
 [Paper Link](https://arxiv.org/pdf/1706.02337)  
