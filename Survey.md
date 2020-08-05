@@ -1,3 +1,5 @@
+[TOC]
+
 ## 文档理解
 
 ![1596418728900](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqbW5R1*DATbMs2rMyXVhKuTYJ1JURggHEtf6cGF*vGNAIm2jWo1w791V.CSI3NkdTww4mCrRcrVRVwe803cvDfQ!/b&bo=uwPxAbsD8QEDCSw!&rf=viewer_4)
@@ -10,11 +12,17 @@
 
 ## 1.文档语义分割
 
-### 语义分割的定义
+### 1.1 语义分割的定义
 
 ​		语义分割是当今计算机视觉领域的关键问题之一。从宏观上看，语义分割是一项高层次任务，为实现场景的完整理解铺平了道路。场景理解作为一个核心计算机视觉问题，其重要性在于越来越多的应用程序通过从图像中推断知识来提供营养。其中一些应用包括自动驾驶，人机交互，虚拟现实等。 其涉及将一些原始数据（例如，平面图像）作为输入并将它们转换为具有突出显示的感兴趣区域的掩模。许多人使用术语全像素语义分割（full-pixel semantic segmentation），其中图像中的每个像素根据其所属的感兴趣对象被分配类别。 
 
-### 文档语义分割的定义
+### 1.2 视觉丰富文档
+
+视觉丰富文档 (Visually Rich Documents, VRDs) 指含有丰富的视觉和布局信息的文档，如票据、保险单、营业执照等。在这类文档中，文本的语义结构不仅取决于文字本身的含义，还取决于视觉特征。如某行文本的相对于其他文本的位置、文本的字体字号、是否倾斜或加粗等。处理这类文档，不能简单地将文本序列化为一维数据，否则必然会导致文档信息的损失。如下图所示，"$649.35"表示的是"Total Amount"，不仅是因为"$649.35"本身表示的是金钱的数量，还因为其左侧的"Total"字样，两者共同决定了"$649.35"是"Total Amount"的值。
+
+![example](https://i.loli.net/2020/08/04/XqMH6fKxbZiDehU.png)
+
+### 1.3 文档语义分割的定义
 
 ​		文档语义分割在学术上尚且没有一个统一的定义，但总体而言都是在解决同一个问题，即在文档图像上的语义分割任务。进一步地，文档语义分割可以分类为OCR前的语义分割和OCR后的语义分割，在此选取两篇论文中的定义来阐述。
 
@@ -22,13 +30,13 @@
 
 ![1596420468285](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrENGrtySjFhQ8TF5UgHj8hIqSzj8RsLRO*cCOzpvtTDRvk8Eri*I3B5siBs6QSGOpq.kkLpTmbHdi8IQQ55ir0ig!/b&bo=SQOMAEkDjAADGTw!&rf=viewer_4)
 
-#### OCR前语义分割
+#### 1.3.1 OCR前语义分割
 
 ​		对于OCR前的语义分割，Bukhari 等人在 DAS 2010 中发表的论文的表述如下 : “文档图像的语义分割将文档分割为文字和非文字区域，是文档图像分析任务中提升OCR结果的一个十分重要的预处理步骤”。也就是说，OCR前的语义分割通常将文档图像分割为文字，图片和表格区域。对于分割出的文字部分，可利用相关算法进行文字检测和识别。对于分割出的图片部分，可使用图像分析算法进行解析。对于分割出的表格部分，可使用表格理解算法进行表格理解。
 
 ![1596427227229](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJ61FQaImMR6n1MlTCfM8QfXVf1u99bSqcpyI9s4FOf.ByrK7EpFQoYEL0rloyUqCMwqbK3QuQJXacDyo6k8FbQ!/r )
 
-#### OCR后语义分割
+#### 1.3.2 OCR后语义分割
 
 ​		对于OCR后的语义分割，通常又被称作文档信息抽取，文档版面分析和文档语义结构提取。Yang 等人在 CVPR 2017 中发表的论文的表述如下 : "我们将文档语义结构提取看作一个逐像素的语义分割任务，并提出了一个统一的模型，该模型不同于传统的版面分割任务，仅仅基于视觉来分类像素"。换言之，OCR后的语义分割任务更多的融合了文字的语义信息和上下文信息，可以更好的找到更详尽的语义类型，用于文档的版面分析于信息抽取当中。
 
@@ -36,11 +44,11 @@
 
 ![1596436467871](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFMtLyATAFC70E*kNS9sWWLulUrFfd03bDi6qjuvg81lLwxkt4mqJ*ncEb2eMZasJRKydfhe*091iPLZrwwxAm0!/r )
 
-### 文档语义结构提取（Document Semantic Structure Extraction）
+### 1.4 文档语义结构提取（Document Semantic Structure Extraction）
 
 ​	文档语义结构提取致力于理解文档图像，其目标是将文档图像分割为感兴趣的区域，并识别每个区域的属性。它通常由两个步骤完成，第一步叫做版面分割（Page Segmentation）。文档分割基于视觉，致力于将文字，图片，表格和线条等区域区分开。第二步叫做逻辑结构分析（Logical Structure Analysis）。逻辑结构分析基于语义，把每个区域分类为语义相关的类别，诸如段落，标题，字幕，列表等。
 
-#### 版面分割
+#### 1.4.1 版面分割
 
 ​	版面分割从大类来分有三种方法：基于规则的方法，基于机器学习的方法和基于深度学习的方法。
 
@@ -48,11 +56,105 @@
 
 ​	基于深度学习的方法通常使用全卷积网络（Fully Convolutional Network）来进行版面分割。然而，这些方法十分受限于视觉线索，并不能利用文字的语义信息。
 
-#### 逻辑结构分析
+#### 1.4.2 逻辑结构分析
 
 ​	逻辑结构被定义为文档逻辑成分的层次结构，诸如段落，列表，标题等。早期的工作使用一系列基于位置，字体和文字的启发式规则。Shilman等人将文档版面建模为语法，并使用机器学习的方法最小化非法解析的代价。Luong等人提出基于索然规则使用条件随机场对每个句子进行联合标签。然而，这些方法的效果都受限于对手工设计的特征的依赖。
 
-## 2.基于自然语言处理的语义分割
+## 2.数据集
+
+​		语义分割模型的训练需要庞大的训练数据，从2010年开始陆续出现了若干具有一定规模的语义分割数据集。这些数据集有些专注于表格检测的任务，有些致力于版面分割的任务，近一两年来出现了拥有更多细粒度标签的大规模语义分割数据集，诸如PubLayNet和DocBank。随着时间的推移，数据集的制作方式由人工标注转变为基于规则的弱监督生成，数据集的大小与日俱增，训练出来的语义分割模型也随之越来越强大。这使得基于大规模多领域数据集的语义分割预训练模型的设想成为现实[1]。
+
+![1596436245954]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEOzIanVWLWA8mkhyQMEPUgvn5gKq.t7tPStAGLeHhO*UfgY1iL0uGr9yJMtCFvQr48xpDRPFq2HVwnk..0HK5hw!/r )
+
+![1596436155245]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrELLAEF2TedUovX52*rJV3X**4ySrGDKO8llKmhOZjzshvhDUgJB6Y9YoCaYfhtg8E6heJiQjzi0Qebm30KoABHU!/r )
+
+### 2.1 FUNSD [2]
+
+数据集共包含199份完全标注的表单，31485个单词，9707个语义实体以及5304个关系。语义实体的类有header, question, answer, other四种。
+
+![FUNSD_img](https://i.loli.net/2020/08/02/RrejCufWkhZFgMQ.png)
+
+### 2.2 ICDAR 2013 [3]
+
+​		该数据集是表格检测和结构识别任务中引用最多的数据集之一。它包含67个PDF，对应238页图像。其中40份来自美国政府，27份来自欧盟。在238页图像中，只有135页图像包含表，共有150个表。该数据集被广泛用于表检测和结构识别任务的算法评估。
+
+###  2.3 ICDAR-POD-2017 [4]
+
+​		它着重于检测文档图像中的各种图形对象（如表格、公式和图形），通过从CiteSeer的1500篇科学论文中选出的2417个文档图像来创建。它包括多种多样的页面布局—单列、双列、多列，以及对象结构的显著变化。该数据集被分成（i）由1600个图像组成的训练集，和（ii）包含817个图像的测试集。
+
+### 2.4 SROIE [5]
+
+该数据集出自ICDAR 2019 Robust Reading Competition的Task 3-Key Information Extraction from Scanned Receipts，训练集含626张图片，测试集含347张图片，标注的实体类有company，date，address，total四种。
+
+![SROIE_img](https://i.loli.net/2020/08/03/2bLSV4OdD8Khklu.jpg)
+
+    {
+    	"company": "STARBUCKS STORE #10208",
+    	"date": "12/07/2014",
+    	"address": "11302 EUCLID AVENUE, CLEVELAND, OH (216) 229-0749",
+    	"total": "4.95"
+    }
+
+### 2.5 ICDAR RDCL [6]
+
+ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的简称，每两年举办一次。比赛使用的数据集为PRImA版面分析数据集，由曼彻斯特萨福德大学PRImA实验室提出，包括当代杂志和科学文章之内的扫面页。其主要任务是进行版面分割和区域分类。
+
+![1596451116804]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEPPOa0rFR7ADEpP546LN1rIcatM2Upr7*6JeI7GhN2aSi6nUa62sHWCQrVGfv8LfJyCJ4PbpZS.zYTcp1wKmrHQ!/r )
+
+### 2.6 cTDAR [7]
+
+​		该数据集由各种格式的现代文献和存档文档组成，包括文档图像和PDF等数字格式。这些图像显示了各种各样的表格，从手工绘制的会计账簿到证券交易清单、火车时刻表、囚犯名单记录簿、印刷书籍表格、生产普查等。现代文献包括科学期刊、表格、财务报表等。注释与表区域相对应，单元格区域可用。该数据集包含（i）训练集-由600个带标注的档案和600个带表格边界框的现代注释文档图像组成，以及（ii）测试集-包括199个带注释的档案和240个带表格边框的现代文档图像。
+
+### 2.7 DSSE-200 [8]
+
+数据集提供了基于图片特征和语义特征的标签，包含从杂志和学术论文中获取的200个页面。页面中的区域标签有以下几种：figure, table, section, caption, list和paragraph，标注采用VOC数据集格式。图片标注示例如下图所示，其中红色表示figure，绿色表示section，蓝色表示text。
+
+![DSSE200](https://i.loli.net/2020/08/04/kJPe9w8rGabBFcy.png)
+
+### 2.8 Marmot [9]
+
+​		Marmot 数据集由北京大学王选计算机研究所网络内容保护与文档处理研究室制作，它由2000页中英文组成，比例约为1 : 1。中文网页选自方正阿帕比图书馆提供的120多种不同主题的电子书，其中在每本书中选取不超过15页。英文版选自Citeseer网站1970-2011年间出版的1500多篇期刊和会议论文。页面显示了各种各样的布局—一列和两列、语言类型和表格样式。此数据集用于表格检测和结构识别任务。
+
+### 2.9 UNLV [10]
+
+​		它包含2889个文档图像，包括技术报告、杂志、商业信函、报纸等，其中只有427个图像包含558个表格。表区域和单元格区域的注释可用。此数据集还用于表格检测和表结构识别任务。
+
+### 2.10 IIIT-AR-13K [11]
+
+​		IIIT-AR-13K由印度国际信息技术学院提出，该数据集通过手工标注公开企业年报制作，一共包含13K张图片。数据集内的元素有以下五个类别：表格，图片，自然图片，LOGO和签名。这是目前最大的图像目标检测手工标注数据集。数据来源于不同语言的多家公司在若干年来发布的企业年报，这给数据集带来了很大的多样性。
+
+### 2.11 PubLayNet [12]
+
+​		PubLayNet是一个大型文档图像数据集，文档布局同时使用边界框和多边形进行标注。其使用的原始文档是PubMed中心开源数据集，通过自动化对齐PDF解析结果和XML文件来完成对文档的标注。该工作获得了2019年ICDAR的最佳论文奖。
+
+![publaynet](https://i.loli.net/2020/08/04/3urWMmCeRGLxANj.png) 
+
+### 2.12 TableBank [13]
+
+​		TableBank是由北航与微软亚洲研究院联合提出的表格检测与识别新型数据集。该数据集是通过对网上的Word和Latex文档进行弱监督而建立的，不同于传统的弱监督数据集，作者使用的方法可以获得大规模且高质量的训练数据。其包含417,234个高质量标注表格，并且这些表格所在的文档有着各式各样的领域。
+
+| Task                        | Word    | Latex   | Word+Latex |
+| --------------------------- | ------- | ------- | ---------- |
+| Table detection             | 163,417 | 253,817 | 417,234    |
+| Table structure recognition | 56,866  | 88,597  | 145,463    |
+
+### 2.13 DocBank [14]
+
+​		DocBank是由北航，哈工大和微软亚洲研究院联合提出的文档版面分析数据集。与TableBank一样，同样使用弱监督的方法来建立，拥有细粒度的token级标注。该数据集使在下游任务训练的模型可以同时学习到文本的和版面的信息。目前的DocBank包含500K个文档页码，其中400K张用于训练，50K张用于验证，50K张用于测试。
+
+![1596444872518]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEHJHm7msFudCMv2M8seHuyEONHlfeE4xZodg382PTNnuEJKg7iPYHE2kVQ34rfW4xlCDDI.Cm0EY9I.nrr.2Nuk!/r )
+
+​		在文档版面分析任务中，已有一些基于图像的文档版面数据集，而这些数据集大多是针对计算机视觉方法构建的，很难应用于NLP方法。另外，基于图像的数据集主要包括页面图像和大型语义结构的边界框，它们不是细粒度的token级标注。此外，生成人工标记的细粒度token级文本块排列也是耗时和费力的。因此，利用弱监督以最小的努力获得细粒度的标记文档，同时使数据能够易于应用到任意的NLP和计算机视觉方法是至关重要的。
+
+| Dataset         | #Pages  | #Units | Image-based? | Text-based? | Fine-grained? | Extendable? |
+| --------------- | ------- | ------ | ------------ | ----------- | ------------- | ----------- |
+| Article Regions | 100     | 9      | ✔            | ✘           | ✔             | ✘           |
+| GROTOAP2        | 119,334 | 22     | ✔            | ✘           | ✘             | ✘           |
+| PubLayNet       | 364,232 | 5      | ✔            | ✘           | ✔             | ✘           |
+| TableBank       | 417,234 | 1      | ✔            | ✘           | ✔             | ✔           |
+| DocBank         | 500,000 | 12     | ✔            | ✔           | ✔             | ✔           |
+
+## 3.基于自然语言处理的语义分割
 
 ​		基于自然语言处理的语义分割从属于后OCR的语义分割，其基本思想是将文字识别的结果转化为对应的词嵌入。通过命名实体识别（Named Entity Recognition）或槽填充的方法（Slot Filling）实现对文字区域的细分类。
 
@@ -80,7 +182,7 @@
 
 ​		UBL Invoice和 PDF 一同通过GUI提供给用户，用户可以修正结果当中的任何Field。一旦用户修改了任何错误并接受了产出的Invoice，结果UBL 会被加入到系统的数据库当中。分类器利用N-grams和它们的标签来训练。对UBL文档当中每个field，作者考虑所有的N-grams，并检查解析后的文字内容是否和field匹配。通过这样的方式，GUI可以专注于使用户审查和纠正错误。这个系统相比于机器学习需要，更多的专注于用户体验。 
 
-## 3.基于逐像素分类的语义分割
+## 4.基于逐像素分类的语义分割
 
 - Multi-scale Multi-task FCN for Semantic Page Segmentation and Table Detection. ICDAR, 2017.
 - Learning  to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks. CVPR, 2017.
@@ -126,7 +228,7 @@
 
 
 
-## 4.基于目标检测的语义分割
+## 5.基于目标检测的语义分割
 
 - DeepDeSRT: Deep Learning for Detection and Structure Recognition of Tables in Document Images. ICDAR, 2017
 - Fast CNN-based document layout analysis. ICCV, 2017
@@ -136,107 +238,82 @@
 
 ![1596419804068]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFuIMA1KftuWbGVyiqGD1NgKgRj5zXHYB1nnuwxYpisFFFPyL.K5C8v.MP2T.GsMxup7Zq7yOh58BkTrqQW*FF4!/r )
 
-## 5.数据集
-
-​		语义分割模型的训练需要庞大的训练数据，从2010年开始陆续出现了若干具有一定规模的语义分割数据集。这些数据集有些专注于表格检测的任务，有些致力于版面分割的任务，近一两年来出现了拥有更多细粒度标签的大规模语义分割数据集，诸如PubLayNet和DocBank。随着时间的推移，数据集的制作方式由人工标注转变为基于规则的弱监督生成，数据集的大小与日俱增，训练出来的语义分割模型也随之越来越强大。这使得基于大规模多领域数据集的语义分割预训练模型的设想成为现实[14]。
-
-![1596436245954]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEOzIanVWLWA8mkhyQMEPUgvn5gKq.t7tPStAGLeHhO*UfgY1iL0uGr9yJMtCFvQr48xpDRPFq2HVwnk..0HK5hw!/r )
-
-![1596436155245]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrELLAEF2TedUovX52*rJV3X**4ySrGDKO8llKmhOZjzshvhDUgJB6Y9YoCaYfhtg8E6heJiQjzi0Qebm30KoABHU!/r )
-
-### ICDAR 2013 [16]
-
-​		该数据集是表格检测和结构识别任务中引用最多的数据集之一。它包含67个PDF，对应238页图像。其中40份来自美国政府，27份来自欧盟。在238页图像中，只有135页图像包含表，共有150个表。该数据集被广泛用于表检测和结构识别任务的算法评估。
-
-###  ICDAR-POD-2017 [17]
-
-​		它着重于检测文档图像中的各种图形对象（如表格、公式和图形），通过从CiteSeer的1500篇科学论文中选出的2417个文档图像来创建。它包括多种多样的页面布局—单列、双列、多列，以及对象结构的显著变化。该数据集被分成（i）由1600个图像组成的训练集，和（ii）包含817个图像的测试集。
-
-### ICDAR RDCL [21]
-
-ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的简称，每两年举办一次。比赛使用的数据集为PRImA版面分析数据集，由曼彻斯特萨福德大学PRImA实验室提出，包括当代杂志和科学文章之内的扫面页。其主要任务是进行版面分割和区域分类。
-
-![1596451116804]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEPPOa0rFR7ADEpP546LN1rIcatM2Upr7*6JeI7GhN2aSi6nUa62sHWCQrVGfv8LfJyCJ4PbpZS.zYTcp1wKmrHQ!/r )
-
-### cTDAR [18]
-
-​		该数据集由各种格式的现代文献和存档文档组成，包括文档图像和PDF等数字格式。这些图像显示了各种各样的表格，从手工绘制的会计账簿到证券交易清单、火车时刻表、囚犯名单记录簿、印刷书籍表格、生产普查等。现代文献包括科学期刊、表格、财务报表等。注释与表区域相对应，单元格区域可用。该数据集包含（i）训练集-由600个带标注的档案和600个带表格边界框的现代注释文档图像组成，以及（ii）测试集-包括199个带注释的档案和240个带表格边框的现代文档图像。
-
-### Marmot [19]
-
-​		Marmot 数据集由北京大学王选计算机研究所网络内容保护与文档处理研究室制作，它由2000页中英文组成，比例约为1 : 1。中文网页选自方正阿帕比图书馆提供的120多种不同主题的电子书，其中在每本书中选取不超过15页。英文版选自Citeseer网站1970-2011年间出版的1500多篇期刊和会议论文。页面显示了各种各样的布局—一列和两列、语言类型和表格样式。此数据集用于表格检测和结构识别任务。
-
-### UNLV [20]
-
-​		它包含2889个文档图像，包括技术报告、杂志、商业信函、报纸等，其中只有427个图像包含558个表格。表区域和单元格区域的注释可用。此数据集还用于表格检测和表结构识别任务。
-
-### PubLayNet [13]
-
-​		PubLayNet是一个大型文档图像数据集，文档布局同时使用边界框和多边形进行标注。其使用的原始文档是PubMed中心开源数据集，通过自动化对齐PDF解析结果和XML文件来完成对文档的标注。该工作获得了2019年ICDAR的最佳论文奖。
-
-![1596450718853]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEF.NhDQK9IhR9XnLv6mfQJntby9xaSmnJQiGyl.Ul6neCXZEqLsjDOUUnjCf3rUh.Yt.svCCpra5GulVf8iaafY!/r )
-
-### TableBank [11]
-
-​		TableBank是由北航与微软亚洲研究院联合提出的表格检测与识别新型数据集。该数据集是通过对网上的Word和Latex文档进行弱监督而建立的，不同于传统的弱监督数据集，作者使用的方法可以获得大规模且高质量的训练数据。其包含417,234个高质量标注表格，并且这些表格所在的文档有着各式各样的领域。
-
-| Task                        | Word    | Latex   | Word+Latex |
-| --------------------------- | ------- | ------- | ---------- |
-| Table detection             | 163,417 | 253,817 | 417,234    |
-| Table structure recognition | 56,866  | 88,597  | 145,463    |
-
-![1596442961694]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK7YgC7eevq2N3h8WSTG*reaxWRlyh4jGB91NXc1lhrq2TkZgNBZtL.6SLqRr3vUxOYGPvV02.vrny5nN6uz6BI!/r )
-
-### DocBank [12]
-
-​		DocBank是由北航，哈工大和微软亚洲研究院联合提出的文档版面分析数据集。与TableBank一样，同样使用弱监督的方法来建立，拥有细粒度的token级标注。该数据集使在下游任务训练的模型可以同时学习到文本的和版面的信息。目前的DocBank包含500K个文档页码，其中400K张用于训练，50K张用于验证，50K张用于测试。
-
-![1596444872518]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEHJHm7msFudCMv2M8seHuyEONHlfeE4xZodg382PTNnuEJKg7iPYHE2kVQ34rfW4xlCDDI.Cm0EY9I.nrr.2Nuk!/r )
-
-​		在文档版面分析任务中，已有一些基于图像的文档版面数据集，而这些数据集大多是针对计算机视觉方法构建的，很难应用于NLP方法。另外，基于图像的数据集主要包括页面图像和大型语义结构的边界框，它们不是细粒度的token级标注。此外，生成人工标记的细粒度token级文本块排列也是耗时和费力的。因此，利用弱监督以最小的努力获得细粒度的标记文档，同时使数据能够易于应用到任意的NLP和计算机视觉方法是至关重要的。
-
-| Dataset         | #Pages  | #Units | Image-based? | Text-based? | Fine-grained? | Extendable? |
-| --------------- | ------- | ------ | ------------ | ----------- | ------------- | ----------- |
-| Article Regions | 100     | 9      | ✔            | ✘           | ✔             | ✘           |
-| GROTOAP2        | 119,334 | 22     | ✔            | ✘           | ✘             | ✘           |
-| PubLayNet       | 364,232 | 5      | ✔            | ✘           | ✔             | ✘           |
-| TableBank       | 417,234 | 1      | ✔            | ✘           | ✔             | ✔           |
-| DocBank         | 500,000 | 12     | ✔            | ✔           | ✔             | ✔           |
-
-### IIIT-AR-13K [DAS 2020]
-
-​		IIIT-AR-13K由印度国际信息技术学院提出，该数据集通过手工标注公开企业年报制作，一共包含13K张图片。数据集内的元素有以下五个类别：表格，图片，自然图片，LOGO和签名。这是目前最大的图像目标检测手工标注数据集。数据来源于不同语言的多家公司在若干年来发布的企业年报，这给数据集带来了很大的多样性。
-
 ## 6.评价指标
 
 ### Precision - Recall - F1
 
+​		准确率，召回率及其对应的F1分数通常用于基于语义分割的方法，每种语义类别都需要计算这组分数作为该类别的评估指标。这一系列指标可以有两种计算方式，分别是在一定IoU阈值下基于个数的计算和基于面积的计算。前者更关注模型对每一个实体的预测情况，对能否正确预测每个实体比较敏感。相比之下，后者更关注模型的总体表现。
+
+​		根据任务场景和评估角度的不同可以将这组指标分为单词级和实体级。对于OCR前的语义分割，通常只能计算实体级的指标。而对于OCR后的语义分割，由于有文字检测识别结果的辅助，还可以计算单词级的指标。一般来说，单词级的指标更关注模型的总体表现，而实体级的指标更关注模型对每个语义类型的找准找全情况。
+
+![1596513154629](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596513154629.png)
+
 ### mAP
 
-### IoU
+​		mAP通常用于基于目标检测的方法，其全称是mean Average Precision。这里的Average Precision是在不同recall下计算得到的。
+
+```text
+                  实                    际
+----------------------------------------------------
+        |         1           |            0              
+----------------------------------------------------
+预 |  1  |  TP（True Positive）|   FP（False Positive） 
+    ------------------------------------------------
+测 |  0  | FN（False Negative）|   TN（True Negative）
+----------------------------------------------------
+```
+
+​		准确率，召回率和精度的计算公式如下：
+
+![](https://www.zhihu.com/equation?tex=P%3D%5Cfrac%7BTP%7D%7BTP%2BFP%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%A7%8D%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89)
+
+![](https://www.zhihu.com/equation?tex=R%3D%5Cfrac%7BTP%7D%7BTP%2BFN%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E4%B8%AD%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89)
+
+![](https://www.zhihu.com/equation?tex=accuracy%3D%5Cfrac%7BTP%2BTN%7D%7BTP%2BTN%2BFP%2BFN%7D%EF%BC%8C%EF%BC%88%E9%80%9A%E5%B8%B8%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F%EF%BC%89)
+
+​		Precision度量的是「查准率」，在所有检测出的正样本中是不是实际都为正样本。比如在垃圾邮件判断等场景中，要求有更高的precision，确保放到回收站的都是垃圾邮件。 
+
+​		Recall度量的是「查全率」，所有的正样本是不是都被检测出来了。比如在肿瘤预测场景中，要求模型有更高的recall，不能放过每一个肿瘤。
+
+​		在VOC2010以前，只需要选取当Recall >= 0, 0.1, 0.2, ..., 1共11个点时的Precision最大值，然后AP就是这11个Precision的平均值。在VOC2010及以后则是计算PR曲线下面积作为AP值。
+
+
+
+### Pixel-wise IoU
+
+
+
+### Exact Match F1 Score
+
+
 
 ## 7.参考文献
 
-[10] https://www.icst.pku.edu.cn/cpdp/sjzy/index.htm 
+[1] Yiheng Xu, Minghao Li, Lei Cui, Shaohan Huang, Furu Wei and Ming Zhou - **LayoutLM: Pre-training of Text and Layout for Document Image Understanding** -  *ACM SIGKDD Conference on Knowledge Discovery and Data Mining*
 
-[11] Minghao Li, Lei Cui, Shaohan Huang, Furu Wei, Ming Zhou and Zhoujun Li - **TableBank: A Benchmark Dataset for Table Detection and Recognition** - *15th International Conference on Document Analysis and Recognition*
+[2] https://guillaumejaume.github.io/FUNSD/
 
-[12] Minghao Li, Yiheng Xu, Lei Cui, Shaohan Huang, Furu Wei, Zhoujun Li and Ming Zhou - **DocBank: A Benchmark Dataset for Document Layout Analysis** - ***[ arXiv:2006.01038](https://arxiv.org/abs/2006.01038)***
+[3]  G¨obel, M., Hassan, T., Oro, E. and Orsi, G. - **ICDAR 2013 table competition.** - *12th International Conference on Document Analysis and Recognition*
 
-[13] Xu Zhong, Jianbin Tang and Antonio Jimeno Yepes - **PubLayNet: largest dataset ever for document layout analysis** - *15th International Conference on Document Analysis and Recognition*
+[4]  Gao, L., Yi, X., Jiang, Z., Hao, L. and Tang, Z. - **ICDAR 2017 competition on page object detection.** -*14th International Conference on Document Analysis and Recognition*
 
-[14] Yiheng Xu, Minghao Li, Lei Cui, Shaohan Huang, Furu Wei and Ming Zhou - **LayoutLM: Pre-training of Text and Layout for Document Image Understanding** -  *ACM SIGKDD Conference on Knowledge Discovery and Data Mining*
+[5] https://rrc.cvc.uab.es/?ch=13&com=downloads
 
-[15] Ajoy Mondal, Peter Lipps and [C. V. Jawahar](http://cvit.iiit.ac.in/people/cvit-faculty?view=article&id=8:jawahar&catid=10:faculty) -  **IIIT-AR-13K: A New Dataset for Graphical Object Detection in Documents** - *14th IAPR International Workshop on Document Analysis System* 
+[6]  https://www.primaresearch.org/RDCL2019/ 
 
-[16]  G¨obel, M., Hassan, T., Oro, E. and Orsi, G. - **ICDAR 2013 table competition.** - *12th International Conference on Document Analysis and Recognition*
+[7]  Gao, L., Djean, H., Yan, Q., Kleber, F., Huang, Y., Meunier, J.L. and Fang, Y. - **ICDAR 2019 competition on table detection and recognition (cTDaR).** - *15th International Conference on Document Analysis and Recognition*
 
-[17]  Gao, L., Yi, X., Jiang, Z., Hao, L. and Tang, Z. - **ICDAR 2017 competition on page object detection.** -*14th International Conference on Document Analysis and Recognition*
+[8] http://personal.psu.edu/xuy111/projects/cvpr2017_doc.html
 
-[18]  Gao, L., Djean, H., Yan, Q., Kleber, F., Huang, Y., Meunier, J.L. and Fang, Y. - **ICDAR 2019 competition on table detection and recognition (cTDaR).** - *15th International Conference on Document Analysis and Recognition*
+[9]  Fang, J., Tao, X., Tang, Z., Qiu, R. and Liu, Y. - **Dataset, ground-truth and performance metrics for table detection evaluation.** - *IAPR International Workshop on Document Analysis System 2012*
 
-[19]  Fang, J., Tao, X., Tang, Z., Qiu, R. and Liu, Y. - **Dataset, ground-truth and performance metrics for table detection evaluation.** - *WDAS (2012)*
+[10] Shahab, A., Shafait, F., Kieninger, T. and Dengel, A. - **An open approach towards the benchmarking of table structure recognition systems.** - *Document Analysis System 2010*
 
-[20] Shahab, A., Shafait, F., Kieninger, T. and Dengel, A. - **An open approach towards the benchmarking of table structure recognition systems.** - *Document Analysis System 2010*
+[11] Ajoy Mondal, Peter Lipps and [C. V. Jawahar](http://cvit.iiit.ac.in/people/cvit-faculty?view=article&id=8:jawahar&catid=10:faculty) -  **IIIT-AR-13K: A New Dataset for Graphical Object Detection in Documents** - *14th IAPR International Workshop on Document Analysis System* 
 
-[21]  https://www.primaresearch.org/RDCL2019/ 
+[12] Xu Zhong, Jianbin Tang and Antonio Jimeno Yepes - **PubLayNet: largest dataset ever for document layout analysis** - *15th International Conference on Document Analysis and Recognition*
+
+[13] Minghao Li, Lei Cui, Shaohan Huang, Furu Wei, Ming Zhou and Zhoujun Li - **TableBank: A Benchmark Dataset for Table Detection and Recognition** - *15th International Conference on Document Analysis and Recognition*
+
+[14] Minghao Li, Yiheng Xu, Lei Cui, Shaohan Huang, Furu Wei, Zhoujun Li and Ming Zhou - **DocBank: A Benchmark Dataset for Document Layout Analysis** - ***[ arXiv:2006.01038](https://arxiv.org/abs/2006.01038)***
+
