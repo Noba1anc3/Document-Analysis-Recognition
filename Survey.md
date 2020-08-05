@@ -156,14 +156,6 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ## 3. 评价指标
 
-### Precision - Recall - F1
-
-​		准确率，召回率及其对应的F1分数通常用于基于语义分割的方法，每种语义类别都需要计算这组分数作为该类别的评估指标。这一系列指标可以有两种计算方式，分别是在一定IoU阈值下基于个数的计算和基于面积的计算。前者更关注模型对每一个实体的预测情况，对能否正确预测每个实体比较敏感。相比之下，后者更关注模型的总体表现。
-
-​		根据任务场景和评估角度的不同可以将这组指标分为单词级和实体级。对于OCR前的语义分割，通常只能计算实体级的指标。而对于OCR后的语义分割，由于有文字检测结果的辅助，还可以计算单词级的指标。一般来说，单词级的指标更关注模型的总体表现，而实体级的指标更关注模型对每个语义类型的找准找全情况。
-
-![1596513154629](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqfMqTPnSmdq.h7NVm53LLRLNU1RTMelLJllRtXf9Bemt2sbIOLI69jV46ynSw6Ko2svs6vPTzJJqRaorCR00N3Q!/b&bo=*gY1Av4GNQIDCSw!&rf=viewer_4)
-
 ### mAP
 
 ​		mAP通常用于基于目标检测的方法，其全称是mean Average Precision。这里的Average Precision是在不同recall下计算得到的。
@@ -197,7 +189,13 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ### Pixel-wise IoU
 
+### Precision - Recall - F1
 
+​		准确率，召回率及其对应的F1分数通常用于基于语义分割的方法，每种语义类别都需要计算这组分数作为该类别的评估指标。这一系列指标可以有两种计算方式，分别是在一定IoU阈值下基于个数的计算和基于面积的计算。前者更关注模型对每一个实体的预测情况，对能否正确预测每个实体比较敏感。相比之下，后者更关注模型的总体表现。
+
+​		根据任务场景和评估角度的不同可以将这组指标分为单词级和实体级。对于OCR前的语义分割，通常只能计算实体级的指标。而对于OCR后的语义分割，由于有文字检测结果的辅助，还可以计算单词级的指标。一般来说，单词级的指标更关注模型的总体表现，而实体级的指标更关注模型对每个语义类型的找准找全情况。
+
+![1596513154629](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqfMqTPnSmdq.h7NVm53LLRLNU1RTMelLJllRtXf9Bemt2sbIOLI69jV46ynSw6Ko2svs6vPTzJJqRaorCR00N3Q!/b&bo=*gY1Av4GNQIDCSw!&rf=viewer_4)
 
 ### Exact Match F1 Score
 
@@ -273,7 +271,25 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​	为了解决训练数据的问题，作者提出了一个有效的合成文档生成方式，并用它生成了大规模的预训练数据。进一步地，作者提出了两个无监督任务用于更好的提升模型泛化性。其中，通过重建原始图像，重建任务有助于学到更好的表征；连续性任务鼓励同一区域的像素拥有相似的表征。
 
-#### LayoutLM
+| Methods               | non-text | text |
+| --------------------- | -------- | ---- |
+| Leptonica [18]        | 84.7     | 86.8 |
+| Bukhari et al. [19]   | 90.6     | 90.3 |
+| Ours (binary)         | 94.5     | 91.0 |
+| Methods               | figure   | text |
+| Fernandez et al. [20] | 70.1     | 85.8 |
+| Ours (binary)         | 77.1     | 91.0 |
+
+​																	ICDAR2015数据集上的IoU分数表
+
+| Methods           | section | caption | list  | para. |
+| ----------------- | ------- | ------- | ----- | ----- |
+| Luong et al. [21] | 0.916   | 0.781   | 0.712 | 0.969 |
+| Ours              | 0.919   | 0.893   | 0.793 | 0.969 |
+
+​																		SectLabel数据集上的F1分数表
+
+#### LayoutLM [1]
 
 
 
@@ -287,7 +303,23 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ![1596419804068]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFuIMA1KftuWbGVyiqGD1NgKgRj5zXHYB1nnuwxYpisFFFPyL.K5C8v.MP2T.GsMxup7Zq7yOh58BkTrqQW*FF4!/r )
 
+#### Visual Detection with Context for Document Layout Analysis [22]
 
+​		这篇文章中，作者提出了将上下文信息加入到特征当中用于Faster RCNN对bounding box的分类和回归；除此之外，作者标注了一个新的论文数据集，其中包括9个类别，100篇文章的822个页面。实验结果表明，结合了上下文信息的特征使模型在作者制作的数据集上的mAP提升了23.9%。并且，该方法比基于文本的方法快14倍。
+
+![](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqbsZaGi7GGusZkdsW6ISQWCwxb1*ErwkLbgUStPdp2NgxQpiRtNPeLwEwkVnuAtCMEOCx9iutEl6qPyerMMqESQ!/b&bo=uwERAbsBEQEDCSw!&rf=viewer_4)
+
+​		Baseline的mAP为46.38%，表现最好的类是“正文”，其AP为87.49%，表现最糟糕的类是“作者”，其AP为1.22%。作者融合到特征中的上下文信息如下：
+
+- 页面上下文：当前页的页码和文档的总页面数，二者均被标准化到数据集中文档的平均页数：8.22。
+
+- 边界框上下文：RoI的位置和大小，均被标准化到图像的维度。
+
+  二者被加入到了用于批RoIs的池化后特征中，而后用于分类和回归。
+
+  融合了上下文特征的模型分数如下：mAP为70.3%，表现最好的类是”正文“，其AP为93.58%，表现最糟糕的类是"作者"，其AP为10.34%。
+
+![1596592477753](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJkWGGOfEsT0z01H2Px.KG4thtKvcP8bYlmrjY2X3zNC0m*DFUoD8oPpc1iOGh.YtCyPgBClJoR92rLNkUgY*Ig!/b&bo=iAOsAYgDrAEDGTw!&rf=viewer_4)
 
 ## 7.参考文献
 
@@ -325,3 +357,12 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 [17] Xiao Yang, Ersin Yumer, Paul Asente, Mike Kraley, Daniel Kifer and C. Lee Giles - **Learning to Extract Semantic Structure From Documents Using Multimodal Fully Convolutional Neural Networks** -  *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 5315-5324*
 
+[18] D. S. Bloomberg and L. Vincent. - **Document image applications.** - *Morphologie Mathmatique, 2007. 8*
+
+[19] S. S. Bukhari, F. Shafait, and T. M. Breuel. - **Improved document image segmentation algorithm using multi resolution morphology.** - *In IS&T/SPIE Electronic Imaging, pages 78740D–78740D. International Society for Optics and Photonics, 2011. 8* 
+
+[20] F. C. Fernandez and O. R. Terrades. - **Document segmentation using relative location features.** - *In Pattern Recognition (ICPR), 2012 21st International Conference on, pages 1562–1565. IEEE, 2012. 8*
+
+[21] M.-T. Luong, T. D. Nguyen, and M.-Y. Kan. - **Logical structure recovery in scholarly articles with rich document features.** - *Multimedia Storage and Retrieval Innovations for Digital Library Systems, 270, 2012. 2, 6, 8* 
+
+[22] Carlos Soto and Shinjae Yoo - **Visual Detection with Context for Document Layout Analysis** - *Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)*
