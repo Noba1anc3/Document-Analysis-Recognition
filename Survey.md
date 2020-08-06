@@ -26,9 +26,8 @@
 
 ​		文档语义分割在学术上尚且没有一个统一的定义，但总体而言都是在解决同一个问题，即在文档图像上的语义分割任务。进一步地，文档语义分割可以分类为OCR前的语义分割和OCR后的语义分割，在此选取两篇论文中的定义来阐述。
 
-<div align="center"><img src=" http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK0sKe8cnyDZUZBs1KWk64OBd5iMFqfGlMS41sRCqxvSi2ZXXarVpNbiuOebb0RXlfjpeOghrKPQQ6J4SMSI7AI!/r" /></div>
-
-<div align="center"><img src=" http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrENGrtySjFhQ8TF5UgHj8hIqSzj8RsLRO*cCOzpvtTDRvk8Eri*I3B5siBs6QSGOpq.kkLpTmbHdi8IQQ55ir0ig!/b&bo=SQOMAEkDjAADGTw!&rf=viewer_4" /></div>
+<div align="center"><img src="http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK0sKe8cnyDZUZBs1KWk64OBd5iMFqfGlMS41sRCqxvSi2ZXXarVpNbiuOebb0RXlfjpeOghrKPQQ6J4SMSI7AI!/r" /></div>
+<div align="center"><img src="http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrENGrtySjFhQ8TF5UgHj8hIqSzj8RsLRO*cCOzpvtTDRvk8Eri*I3B5siBs6QSGOpq.kkLpTmbHdi8IQQ55ir0ig!/b&bo=SQOMAEkDjAADGTw!&rf=viewer_4" /></div>
 
 #### 1.3.1 OCR前语义分割
 
@@ -117,10 +116,10 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​		TableBank是由北航与微软亚洲研究院联合提出的表格检测与识别新型数据集。该数据集是通过对网上的Word和Latex文档进行弱监督而建立的，不同于传统的弱监督数据集，作者使用的方法可以获得大规模且高质量的训练数据。其包含417,234个高质量标注表格，并且这些表格所在的文档有着各式各样的领域。
 
-|            Task             |  Word   |  Latex  | Word+Latex |
-| :-------------------------: | :-----: | :-----: | :--------: |
-|       Table detection       | 163,417 | 253,817 |  417,234   |
-| Table structure recognition | 56,866  | 88,597  |  145,463   |
+| Task                        | Word    | Latex   | Word+Latex |
+| --------------------------- | ------- | ------- | ---------- |
+| Table detection             | 163,417 | 253,817 | 417,234    |
+| Table structure recognition | 56,866  | 88,597  | 145,463    |
 
 ### 2.13 DocBank [14]
 
@@ -152,9 +151,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 ​		准确率，召回率和精度的计算公式如下：
 
 <div align="center"><img src="https://www.zhihu.com/equation?tex=P%3D%5Cfrac%7BTP%7D%7BTP%2BFP%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%A7%8D%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89"/></div>
-
 <div align="center"><img src="https://www.zhihu.com/equation?tex=R%3D%5Cfrac%7BTP%7D%7BTP%2BFN%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E4%B8%AD%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89"/></div>
-
 <div align="center"><img src="https://www.zhihu.com/equation?tex=accuracy%3D%5Cfrac%7BTP%2BTN%7D%7BTP%2BTN%2BFP%2BFN%7D%EF%BC%8C%EF%BC%88%E9%80%9A%E5%B8%B8%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F%EF%BC%89"/></div>
 
 ​		Precision度量的是「查准率」，在所有检测出的正样本中是不是实际都为正样本。比如在垃圾邮件判断等场景中，要求有更高的precision，确保放到回收站的都是垃圾邮件。 
@@ -275,23 +272,23 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ​	为了解决训练数据的问题，作者提出了一个有效的合成文档生成方式，并用它生成了大规模的预训练数据。进一步地，作者提出了两个无监督任务用于更好的提升模型泛化性。其中，通过重建原始图像，重建任务有助于学到更好的表征；连续性任务鼓励同一区域的像素拥有相似的表征。
 
-|       Methods       | non-text | text |
-| :-----------------: | :------: | :--: |
-|   Leptonica [18]    |   84.7   | 86.8 |
-| Bukhari et al. [19] |   90.6   | 90.3 |
-|    Ours (binary)    |   94.5   | 91.0 |
+| Methods             | non-text | text |
+| ------------------- | -------- | ---- |
+| Leptonica [18]      | 84.7     | 86.8 |
+| Bukhari et al. [19] | 90.6     | 90.3 |
+| Ours (binary)       | 94.5     | 91.0 |
 
-|        Methods        | figure | text |
-| :-------------------: | :----: | :--: |
-| Fernandez et al. [20] |  70.1  | 85.8 |
-|     Ours (binary)     |  77.1  | 91.0 |
+| Methods               | figure | text |
+| --------------------- | ------ | ---- |
+| Fernandez et al. [20] | 70.1   | 85.8 |
+| Ours (binary)         | 77.1   | 91.0 |
 
 ​																	ICDAR2015数据集上的IoU分数表
 
-|      Methods      | section | caption | list  | para. |
-| :---------------: | :-----: | :-----: | :---: | :---: |
-| Luong et al. [21] |  0.916  |  0.781  | 0.712 | 0.969 |
-|       Ours        |  0.919  |  0.893  | 0.793 | 0.969 |
+| Methods           | section | caption | list  | para. |
+| ----------------- | ------- | ------- | ----- | ----- |
+| Luong et al. [21] | 0.916   | 0.781   | 0.712 | 0.969 |
+| Ours              | 0.919   | 0.893   | 0.793 | 0.969 |
 
 ​																		SectLabel数据集上的F1分数表
 
