@@ -20,15 +20,15 @@
 
 视觉丰富文档 (Visually Rich Documents, VRDs) 指含有丰富的视觉和布局信息的文档，如票据、保险单、营业执照等。在这类文档中，文本的语义结构不仅取决于文字本身的含义，还取决于视觉特征。如某行文本的相对于其他文本的位置、文本的字体字号、是否倾斜或加粗等。处理这类文档，不能简单地将文本序列化为一维数据，否则必然会导致文档信息的损失。如下图所示，"$649.35"表示的是"Total Amount"，不仅是因为"$649.35"本身表示的是金钱的数量，还因为其左侧的"Total"字样，两者共同决定了"$649.35"是"Total Amount"的值。
 
-<img src="https://i.loli.net/2020/08/04/XqMH6fKxbZiDehU.png"  width="500" />
+<div align="center"><img src="https://i.loli.net/2020/08/04/XqMH6fKxbZiDehU.png"  width="500"/></div>
 
 ### 1.3 文档语义分割的定义
 
 ​		文档语义分割在学术上尚且没有一个统一的定义，但总体而言都是在解决同一个问题，即在文档图像上的语义分割任务。进一步地，文档语义分割可以分类为OCR前的语义分割和OCR后的语义分割，在此选取两篇论文中的定义来阐述。
 
-![1596420457262]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK0sKe8cnyDZUZBs1KWk64OBd5iMFqfGlMS41sRCqxvSi2ZXXarVpNbiuOebb0RXlfjpeOghrKPQQ6J4SMSI7AI!/r )
+<div align="center"><img src=" http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK0sKe8cnyDZUZBs1KWk64OBd5iMFqfGlMS41sRCqxvSi2ZXXarVpNbiuOebb0RXlfjpeOghrKPQQ6J4SMSI7AI!/r" /></div>
 
-![1596420468285](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrENGrtySjFhQ8TF5UgHj8hIqSzj8RsLRO*cCOzpvtTDRvk8Eri*I3B5siBs6QSGOpq.kkLpTmbHdi8IQQ55ir0ig!/b&bo=SQOMAEkDjAADGTw!&rf=viewer_4)
+<div align="center"><img src=" http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrENGrtySjFhQ8TF5UgHj8hIqSzj8RsLRO*cCOzpvtTDRvk8Eri*I3B5siBs6QSGOpq.kkLpTmbHdi8IQQ55ir0ig!/b&bo=SQOMAEkDjAADGTw!&rf=viewer_4" /></div>
 
 #### 1.3.1 OCR前语义分割
 
@@ -56,7 +56,7 @@
 
 数据集共包含199份完全标注的表单，31485个单词，9707个语义实体以及5304个关系。语义实体的类有header, question, answer, other四种。
 
-<img src="https://i.loli.net/2020/08/02/RrejCufWkhZFgMQ.png"  width="700" />
+<div align="center"><img src="https://i.loli.net/2020/08/02/RrejCufWkhZFgMQ.png"  width="700" /></div>
 
 ### 2.2 ICDAR 2013 [3]
 
@@ -70,7 +70,7 @@
 
 该数据集出自ICDAR 2019 Robust Reading Competition的Task 3-Key Information Extraction from Scanned Receipts，训练集含626张图片，测试集含347张图片，标注的实体类有company，date，address，total四种。
 
-<img src="https://i.loli.net/2020/08/03/2bLSV4OdD8Khklu.jpg"  width="400" />
+<div align="center"><img src="https://i.loli.net/2020/08/03/2bLSV4OdD8Khklu.jpg"  width="400"/></div>
 
     {
     	"company": "STARBUCKS STORE #10208",
