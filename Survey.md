@@ -190,7 +190,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ### Edit-Distance Based Accuracy
 
-<div align="center"><img src="https://i.loli.net/2020/08/05/KsHvkjDUw3aWfGh.png"  width="600" /><div>
+<div align="center"><img src="https://i.loli.net/2020/08/05/KsHvkjDUw3aWfGh.png"  width="600" /></div>
 
 ​		
 
