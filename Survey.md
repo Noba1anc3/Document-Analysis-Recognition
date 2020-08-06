@@ -72,7 +72,7 @@
 
 ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的简称，每两年举办一次。比赛使用的数据集为PRImA版面分析数据集，由曼彻斯特萨福德大学PRImA实验室提出，包括当代杂志和科学文章之内的扫面页。其主要任务是进行版面分割和区域分类。
 
-![1596451116804]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEPPOa0rFR7ADEpP546LN1rIcatM2Upr7*6JeI7GhN2aSi6nUa62sHWCQrVGfv8LfJyCJ4PbpZS.zYTcp1wKmrHQ!/r )
+<div align="center"><img src="http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEPPOa0rFR7ADEpP546LN1rIcatM2Upr7*6JeI7GhN2aSi6nUa62sHWCQrVGfv8LfJyCJ4PbpZS.zYTcp1wKmrHQ!/r"  width="700" /></div>
 
 ### 2.6 cTDAR [7]
 
@@ -338,13 +338,13 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ​		在表单理解任务上，使用 FUNSD 作为测试数据集，该数据集中的199个标注文档包含31,485个词和9,707个语义实体。在该数据集上，需要对数据集中的表单进行键值对（key-value）抽取。通过引入位置信息的预训练，LayoutLM 在该任务上取得了显著的提升。实验结果见下表：
 
-<img src="https://i.loli.net/2020/08/05/nSFa2G5V8qAJTd1.png" width="900" />
+<div align="center"><img src="https://i.loli.net/2020/08/05/nSFa2G5V8qAJTd1.png"  width="900" /></div>
 
 **票据理解 （Receipt Understanding）**
 
 ​		在票据理解任务中，选择 SROIE 比赛数据集作为数据集，其包含1000张已标注的票据，每张票据标注了company，date，address，total四个语义实体。通过在该数据集上微调，LayoutLM的表现比 RDCL 2019(ICDAR Competition on Recognition of Documents with Complex Layouts) 比赛第一名F1 值高1.2个百分点，达到95.24%。其实验结果如下：
 
-<img src="https://i.loli.net/2020/08/05/QP6Zlcf1HpgYIXh.png" width="900" />
+<div align="center"><img src="https://i.loli.net/2020/08/05/QP6Zlcf1HpgYIXh.png"  width="900" /></div>
 
 ## 7. 基于目标检测的语义分割
 
@@ -360,7 +360,7 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ​		这篇文章中，作者提出了将上下文信息加入到特征当中用于Faster RCNN对bounding box的分类和回归；除此之外，作者标注了一个新的论文数据集，其中包括9个类别，100篇文章的822个页面。实验结果表明，结合了上下文信息的特征使模型在作者制作的数据集上的mAP提升了23.9%。并且，该方法比基于文本的方法快14倍。
 
-![](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqbsZaGi7GGusZkdsW6ISQWCwxb1*ErwkLbgUStPdp2NgxQpiRtNPeLwEwkVnuAtCMEOCx9iutEl6qPyerMMqESQ!/b&bo=uwERAbsBEQEDCSw!&rf=viewer_4)
+<div align="center"><img src="http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqbsZaGi7GGusZkdsW6ISQWCwxb1*ErwkLbgUStPdp2NgxQpiRtNPeLwEwkVnuAtCMEOCx9iutEl6qPyerMMqESQ!/b&bo=uwERAbsBEQEDCSw!&rf=viewer_4" /></div>
 
 ​		Baseline的mAP为46.38%，表现最好的类是“正文”，其AP为87.49%，表现最糟糕的类是“作者”，其AP为1.22%。作者融合到特征中的上下文信息如下：
 
@@ -372,7 +372,7 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
   融合了上下文特征的模型分数如下：mAP为70.3%，表现最好的类是”正文“，其AP为93.58%，表现最糟糕的类是"作者"，其AP为10.34%。
 
-![1596592477753](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJkWGGOfEsT0z01H2Px.KG4thtKvcP8bYlmrjY2X3zNC0m*DFUoD8oPpc1iOGh.YtCyPgBClJoR92rLNkUgY*Ig!/b&bo=iAOsAYgDrAEDGTw!&rf=viewer_4)
+<div align="center"><img src="http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJkWGGOfEsT0z01H2Px.KG4thtKvcP8bYlmrjY2X3zNC0m*DFUoD8oPpc1iOGh.YtCyPgBClJoR92rLNkUgY*Ig!/b&bo=iAOsAYgDrAEDGTw!&rf=viewer_4" /></div>
 
 ## 8. 参考文献
 
