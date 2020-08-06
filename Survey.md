@@ -93,7 +93,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 数据集提供了基于图片特征和语义特征的标签，包含从杂志和学术论文中获取的200个页面。页面中的区域标签有以下几种：figure, table, section, caption, list和paragraph，标注采用VOC数据集格式。图片标注示例如下图所示，其中红色表示figure，绿色表示section，蓝色表示text。
 
-<img src="https://i.loli.net/2020/08/04/kJPe9w8rGabBFcy.png"  width="500" align= "center"/>
+<div align="center"><img src="https://i.loli.net/2020/08/04/kJPe9w8rGabBFcy.png"  width="500"/></div>
 
 ### 2.8 Marmot [9]
 
