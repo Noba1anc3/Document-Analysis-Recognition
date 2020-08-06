@@ -222,21 +222,21 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ### 4.2 常见解决方案
 
-
-
-|             特征构成             |                             论文                             |       时间及会议        |                数据集                 |           评估方案           |  指标  |
-| :------------------------------: | :----------------------------------------------------------: | :---------------------: | :-----------------------------------: | :--------------------------: | :----: |
-|       图片特征<br>结构特征       | **Visual Detection with Context for Document Layout Analysis** | 2019<br>EMNLP<br>IJCNLP |  Self Annotated Scientific Articles   |         mAP(IoU@0.5)         | 70.3%  |
-|       图片特征<br>文本特征       | **Learning to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks** |      2017<br>CVPR       |              ICDAR 2015               |        pixel-wise IoU        | 92.75% |
-|                                  |                                                              |                         |               SectLabel               |              F1              | 89.35% |
-|                                  |                                                              |                         |               DSSE-200                |                              |        |
-|       图片特征<br>文本特征       |       **Chargrid: Towards Understanding 2D Documents**       |      2018<br>EMNLP      |           Private Invoices            | Edit Distance based Accuracy | 62.96% |
-|       图片特征<br>文本特征       | **BERTgrid: Contextualized Embedding for 2D Document Representation and Understanding** |     2019<br>NeurIPS     |                                       |                              |        |
-|       结构特征<br>文本特征       | **Cutie: Learning to understand documents with convolutional universal text information extractor** |      2019<br>CVPR       |                                       |                              |        |
-| 图片特征<br>结构特征<br>文本特征 | **LayoutLM: Pre-training of Text and Layout for Document Image Understanding** |       2020<br>KDD       |                 FUNSD                 |     Word-level F1 Score      | 79.27% |
-|                                  |                                                              |                         |                 SROIE                 |     Exact Match F1 Score     | 95.24% |
-|               其他               | **Graph convolution for multimodal information extraction from visually rich documents** |      2019<br>NAACL      |    Value-Added Tax Invoices (VATI)    |                              |        |
-|                                  |                                                              |                         | International Purchase Receipts (IPR) |                              |        |
+|    特征构成    |                             论文                             |       时间及会议        |                数据集                 |           评估方案           |  指标  |
+| :------------: | :----------------------------------------------------------: | :---------------------: | :-----------------------------------: | :--------------------------: | :----: |
+|      图像      | **Multi-scale Multi-task FCN for Semantic Page Segmentation and Table Detection [15]** |      2017<br>ICDAR      |                                       |                              |        |
+|      语义      |  **CloudScan - A configuration-free invoice analysis [16]**  |      2017<br>ICDAR      |                                       |                              |        |
+|   图像+结构    | **Visual Detection with Context for Document Layout Analysis [17]** | 2019<br>EMNLP<br>IJCNLP |  Self Annotated Scientific Articles   |         mAP(IoU@0.5)         | 70.3%  |
+|   图像+语义    | **Learning to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks [18]** |      2017<br>CVPR       |              ICDAR 2015               |        Pixel-wise IoU        | 92.75% |
+|                |                                                              |                         |               SectLabel               |              F1              | 89.35% |
+|                |                                                              |                         |               DSSE-200                |                              |        |
+|   图像+语义    |    **Chargrid: Towards Understanding 2D Documents [19]**     |      2018<br>EMNLP      |           Private Invoices            | Edit Distance based Accuracy | 62.96% |
+|   图像+语义    | **BERTgrid: Contextualized Embedding for 2D Document Representation and Understanding [20]** |     2019<br>NeurIPS     |                                       |                              |        |
+|   结构+语义    | **Cutie: Learning to understand documents with convolutional universal text information extractor [21]** |      2019<br>CVPR       |                                       |                              |        |
+| 图像+语义+结构 | **LayoutLM: Pre-training of Text and Layout for Document Image Understanding [1]** |       2020<br>KDD       |                 FUNSD                 |     Word-level F1 Score      | 79.27% |
+|                |                                                              |                         |                 SROIE                 |     Exact Match F1 Score     | 95.24% |
+|      其他      | **Graph convolution for multimodal information extraction from visually rich documents [22]** |      2019<br>NAACL      |    Value-Added Tax Invoices (VATI)    |                              |        |
+|                |                                                              |                         | International Purchase Receipts (IPR) |                              |        |
 
 ## 4. 基于自然语言处理的语义分割
 
@@ -244,7 +244,7 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ​		此时，命名实体的范畴不再是人名，地名，公司名等传统NER当中定义的命名实体，而是与下游任务紧密关联的命名实体。诸如，身份证当中的命名实体是姓名，出生日期，住址，证件有效期等信息。而对于海关报关票据而言则应当是包含有：发送方，接收方，物品名称，物品单价，物品总量等信息。相对应的，以上提及的命名实体在槽填充当中则转变为需要被填充的槽。
 
-### CloudScan - 基于循环神经网络的免配置发票分析系统 [15]
+### CloudScan - 基于循环神经网络的免配置发票分析系统 [16]
 
 ​		CloudScan是一个简单的，免于配置和维护的发票分析系统。其既可以分析见过的模板，也可以分析尚未见过的模板。在该系统当中并没有模板的概念，也不依赖于任何系统集成和先验知识。该方法是学术界第一个可以精确地分析没有见过的模板的发票分析系统，其自动化训练数据的提取思想与远程监督的思想十分接近。
 
@@ -282,7 +282,7 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ### 5.1 基于视觉信息的方法
 
-#### Multi-scale Multi-task FCN [16]
+#### Multi-scale Multi-task FCN [15]
 
 ​		在MMFCN当中，作者第一次用一个统一的深度学习框架同时解决语义分割和表格检测的任务，亦是第一次使用深度神经网络来生成实例的边界。此外，作者提出了一个新的合成文档方法，用合成文档训练出的模型在真实文档上取得了不错的结果。
 
@@ -298,7 +298,7 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ### 5.2 融合视觉信息与语义信息的方法
 
-#### Multimodal FCN [17]
+#### Multimodal FCN [18]
 
 ​	MFCNN以端到端的方式，逐像素同时辨别其基于视觉和语义的类别。它是一个泛化的页面分割模型，可以基于语义功能对文字区域指定特定的标签以进行细粒度的识别。
 
@@ -308,29 +308,51 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ​	为了解决训练数据的问题，作者提出了一个有效的合成文档生成方式，并用它生成了大规模的预训练数据。进一步地，作者提出了两个无监督任务用于更好的提升模型泛化性。其中，通过重建原始图像，重建任务有助于学到更好的表征；连续性任务鼓励同一区域的像素拥有相似的表征。
 
+**ICDAR 2015数据集上的IoU分数表：**
+
 | Methods             | non-text | text |
 | ------------------- | -------- | ---- |
-| Leptonica [18]      | 84.7     | 86.8 |
-| Bukhari et al. [19] | 90.6     | 90.3 |
+| Leptonica [23]      | 84.7     | 86.8 |
+| Bukhari et al. [24] | 90.6     | 90.3 |
 | Ours (binary)       | 94.5     | 91.0 |
 
 | Methods               | figure | text |
 | --------------------- | ------ | ---- |
-| Fernandez et al. [20] | 70.1   | 85.8 |
+| Fernandez et al. [25] | 70.1   | 85.8 |
 | Ours (binary)         | 77.1   | 91.0 |
 
-​																	ICDAR2015数据集上的IoU分数表
+**SectLabel数据集上的F1分数表：**
 
 | Methods           | section | caption | list  | para. |
 | ----------------- | ------- | ------- | ----- | ----- |
-| Luong et al. [21] | 0.916   | 0.781   | 0.712 | 0.969 |
+| Luong et al. [26] | 0.916   | 0.781   | 0.712 | 0.969 |
 | Ours              | 0.919   | 0.893   | 0.793 | 0.969 |
-
-​																		SectLabel数据集上的F1分数表
 
 #### LayoutLM [1]
 
+​		LayouLM是结合了文档视觉结构以及文本语义信息的通用文档预训练模型。它在Bert模型基础上添加了2-D Position Embedding 和Image Embedding两种新的Embedding层来有效地结合文档视觉和结构信息。
 
+- 2-D Position Embedding生成方法：通过OCR获取每个文字行内的所有单词以其边界框坐标(x0, y0, x1, y1)，将文字行内所有单词的(xmin, ymin, xmax, ymax)分别做embedding，这4个embedding结果的和作为最终的2-D Position Embedding；
+- Image Embedding生成方法：采用Faster RCNN对每个单词区域和整张文档图像提取特征；
+- 将2-D Position Embedding通过预训练的Bert得到LayoutLM Embedding，对LayoutLM Embedding和Image Embedding求和得到最终特征，用于开展下游任务。
+
+<img src="https://i.loli.net/2020/08/05/meYX1cswORyoH53.png" width="1000" />
+
+​		在预训练阶段，LayoutLM采用了MVLM遮罩式视觉语言模型和MDC多标签文档分类两个任务，并以IIT-CDIP 数据集作为训练集进行完全预训练。
+
+​		论文将预训练模型迁移到表单理解、票据理解两个下游任务中并且都取得了目前的最佳成绩。
+
+**表单理解（Form Understanding）**
+
+​		在表单理解任务上，使用 FUNSD 作为测试数据集，该数据集中的199个标注文档包含31,485个词和9,707个语义实体。在该数据集上，需要对数据集中的表单进行键值对（key-value）抽取。通过引入位置信息的预训练，LayoutLM 在该任务上取得了显著的提升。实验结果见下表：
+
+<img src="https://i.loli.net/2020/08/05/nSFa2G5V8qAJTd1.png" width="900" />
+
+**票据理解 （Receipt Understanding）**
+
+​		在票据理解任务中，选择 SROIE 比赛数据集作为数据集，其包含1000张已标注的票据，每张票据标注了company，date，address，total四个语义实体。通过在该数据集上微调，LayoutLM的表现比 RDCL 2019(ICDAR Competition on Recognition of Documents with Complex Layouts) 比赛第一名F1 值高1.2个百分点，达到95.24%。其实验结果如下：
+
+<img src="https://i.loli.net/2020/08/05/QP6Zlcf1HpgYIXh.png" width="900" />
 
 ## 6. 基于目标检测的语义分割
 
@@ -342,7 +364,7 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ![1596419804068]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFuIMA1KftuWbGVyiqGD1NgKgRj5zXHYB1nnuwxYpisFFFPyL.K5C8v.MP2T.GsMxup7Zq7yOh58BkTrqQW*FF4!/r )
 
-#### Visual Detection with Context for Document Layout Analysis [22]
+#### Visual Detection with Context for Document Layout Analysis [17]
 
 ​		这篇文章中，作者提出了将上下文信息加入到特征当中用于Faster RCNN对bounding box的分类和回归；除此之外，作者标注了一个新的论文数据集，其中包括9个类别，100篇文章的822个页面。实验结果表明，结合了上下文信息的特征使模型在作者制作的数据集上的mAP提升了23.9%。并且，该方法比基于文本的方法快14倍。
 
@@ -390,18 +412,27 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 [14] Minghao Li, Yiheng Xu, Lei Cui, Shaohan Huang, Furu Wei, Zhoujun Li and Ming Zhou - **DocBank: A Benchmark Dataset for Document Layout Analysis** - ***[ arXiv:2006.01038](https://arxiv.org/abs/2006.01038)***
 
-[15] Rasmus Berg Palm, Ole Winther and Florian Laws - **CloudScan - A Configuration-Free Invoice Analysis System Using Recurrent Neural Networks** - *14th International Conference on Document Analysis and Recognition*
+[15] Dafang He, Scott Cohen, Brian Price, Daniel Kifer and C. Lee Giles - **Multi-Scale Multi-Task FCN for Semantic Page Segmentation and Table Detection** - *14th International Conference on Document Analysis and Recognition*
 
-[16] Dafang He, Scott Cohen, Brian Price, Daniel Kifer and C. Lee Giles - **Multi-Scale Multi-Task FCN for Semantic Page Segmentation and Table Detection** - *14th International Conference on Document Analysis and Recognition*
+[16] Rasmus Berg Palm, Ole Winther and Florian Laws - **CloudScan - A Configuration-Free Invoice Analysis System Using Recurrent Neural Networks** - *14th International Conference on Document Analysis and Recognition*
 
-[17] Xiao Yang, Ersin Yumer, Paul Asente, Mike Kraley, Daniel Kifer and C. Lee Giles - **Learning to Extract Semantic Structure From Documents Using Multimodal Fully Convolutional Neural Networks** -  *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 5315-5324*
+[17] Carlos Soto and Shinjae Yoo - **Visual Detection with Context for Document Layout Analysis** - *Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)*
 
-[18] D. S. Bloomberg and L. Vincent. - **Document image applications.** - *Morphologie Mathmatique, 2007. 8*
+[18] Xiao Yang, Ersin Yumer, Paul Asente, Mike Kraley, Daniel Kifer and C. Lee Giles - **Learning to Extract Semantic Structure From Documents Using Multimodal Fully Convolutional Neural Networks** -  *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 5315-5324*
 
-[19] S. S. Bukhari, F. Shafait, and T. M. Breuel. - **Improved document image segmentation algorithm using multi resolution morphology.** - *In IS&T/SPIE Electronic Imaging, pages 78740D–78740D. International Society for Optics and Photonics, 2011. 8* 
+[19] Anoop Raveendra Katti, Christian Reisswig, Cordula Guder, Sebastian Brarda, Steffen Bickel, Johannes Höhne and Jean Baptiste Faddoul - **Chargrid: Towards Understanding 2D Documents** - *EMNLP 2018*
 
-[20] F. C. Fernandez and O. R. Terrades. - **Document segmentation using relative location features.** - *In Pattern Recognition (ICPR), 2012 21st International Conference on, pages 1562–1565. IEEE, 2012. 8*
+[20] Timo I. Denk and Christian Reisswig - **BERTgrid: Contextualized Embedding for 2D Document Representation and Understanding** - *"Document Intelligence" workshop of 33rd Conference on Neural Information Processing Systems (NeurIPS 2019)*
 
-[21] M.-T. Luong, T. D. Nguyen, and M.-Y. Kan. - **Logical structure recovery in scholarly articles with rich document features.** - *Multimedia Storage and Retrieval Innovations for Digital Library Systems, 270, 2012. 2, 6, 8* 
+[21] Xiaohui Zhao, Endi Niu, Zhuo Wu and Xiaoguang Wang - **CUTIE: Learning to Understand Documents with Convolutional Universal Text Information Extractor** - *CVPR 2019*
 
-[22] Carlos Soto and Shinjae Yoo - **Visual Detection with Context for Document Layout Analysis** - *Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)*
+[22] Xiaojing Liu, Feiyu Gao, Qiong Zhang and Huasha Zhao - **Graph Convolution for Multimodal Information Extraction from Visually Rich Documents** - *NAACL 2019*
+
+[23] D. S. Bloomberg and L. Vincent. - **Document image applications.** - *Morphologie Mathmatique, 2007. 8*
+
+[24] S. S. Bukhari, F. Shafait, and T. M. Breuel. - **Improved document image segmentation algorithm using multi resolution morphology.** - *In IS&T/SPIE Electronic Imaging, pages 78740D–78740D. International Society for Optics and Photonics, 2011. 8* 
+
+[25] F. C. Fernandez and O. R. Terrades. - **Document segmentation using relative location features.** - *In Pattern Recognition (ICPR), 2012 21st International Conference on, pages 1562–1565. IEEE, 2012. 8*
+
+[26] M.-T. Luong, T. D. Nguyen, and M.-Y. Kan. - **Logical structure recovery in scholarly articles with rich document features.** - *Multimedia Storage and Retrieval Innovations for Digital Library Systems, 270, 2012. 2, 6, 8* 
+
