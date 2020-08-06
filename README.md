@@ -1,8 +1,6 @@
-## Survey Documentation
-[Survey Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/Survey.md)
-
-## Experimental Documentation
-[Experimental Documentation](https://github.com/Noba1anc3/MFCNN/wiki/Layout-Analysis)
+## Documentation
+- [Survey Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/Survey.md)
+- [Experimental Documentation](https://github.com/Noba1anc3/MFCNN/wiki/Layout-Analysis)
 
 ## LayoutLM: Pre-training of Text and Layout for Document Image Understanding @ KDD 2020
 Quality : ⭐⭐⭐  
