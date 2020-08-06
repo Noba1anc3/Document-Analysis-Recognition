@@ -1,15 +1,5 @@
 [TOC]
 
-## 文档理解
-
-![1596418728900](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqbW5R1*DATbMs2rMyXVhKuTYJ1JURggHEtf6cGF*vGNAIm2jWo1w791V.CSI3NkdTww4mCrRcrVRVwe803cvDfQ!/b&bo=uwPxAbsD8QEDCSw!&rf=viewer_4)
-
-![1596418889611](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrED5Ll.FC4PiT3wCDfGukTwzxU37V8MkItnRj4IkEVlZH1c*r0cTANomT94h5SCzH1gWlmbbixKMdlAfUPpumXDk!/r)
-
-![1596418903848]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJdUqzrMaWKZFba.wsx4R9*vWtJEFTS0QCZurf8Hz7Wj13ywuBezLB2vIFs59P2irvF4FTeIpR.dIX.n*S77vcI!/r )
-
-
-
 ## 1. 文档语义分割
 
 ### 1.1 语义分割的定义
@@ -33,7 +23,7 @@
 
 ​		对于OCR前的语义分割，Bukhari 等人在 DAS 2010 中发表的论文的表述如下 : “文档图像的语义分割将文档分割为文字和非文字区域，是文档图像分析任务中提升OCR结果的一个十分重要的预处理步骤”。也就是说，OCR前的语义分割通常将文档图像分割为文字，图片和表格区域。对于分割出的文字部分，可利用相关算法进行文字检测和识别。对于分割出的图片部分，可使用图像分析算法进行解析。对于分割出的表格部分，可使用表格理解算法进行表格理解。
 
-![1596427227229](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJ61FQaImMR6n1MlTCfM8QfXVf1u99bSqcpyI9s4FOf.ByrK7EpFQoYEL0rloyUqCMwqbK3QuQJXacDyo6k8FbQ!/r )
+<div align="center"><img src="http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJ61FQaImMR6n1MlTCfM8QfXVf1u99bSqcpyI9s4FOf.ByrK7EpFQoYEL0rloyUqCMwqbK3QuQJXacDyo6k8FbQ!/r"/></div>
 
 #### 1.3.2 OCR后语义分割
 
@@ -47,9 +37,9 @@
 
 ​		语义分割模型的训练需要庞大的训练数据，从2010年开始陆续出现了若干具有一定规模的语义分割数据集。这些数据集有些专注于表格检测的任务，有些致力于版面分割的任务，近一两年来出现了拥有更多细粒度标签的大规模语义分割数据集，诸如PubLayNet和DocBank。随着时间的推移，数据集的制作方式由人工标注转变为基于规则的弱监督生成，数据集的大小与日俱增，训练出来的语义分割模型也随之越来越强大。这使得基于大规模多领域数据集的语义分割预训练模型的设想成为现实[1]。
 
-![1596436245954]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEOzIanVWLWA8mkhyQMEPUgvn5gKq.t7tPStAGLeHhO*UfgY1iL0uGr9yJMtCFvQr48xpDRPFq2HVwnk..0HK5hw!/r )
+<div align="center"><img src="http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEOzIanVWLWA8mkhyQMEPUgvn5gKq.t7tPStAGLeHhO*UfgY1iL0uGr9yJMtCFvQr48xpDRPFq2HVwnk..0HK5hw!/r"/></div>
 
-![1596436155245]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrELLAEF2TedUovX52*rJV3X**4ySrGDKO8llKmhOZjzshvhDUgJB6Y9YoCaYfhtg8E6heJiQjzi0Qebm30KoABHU!/r )
+<div align="center"><img src="http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrELLAEF2TedUovX52*rJV3X**4ySrGDKO8llKmhOZjzshvhDUgJB6Y9YoCaYfhtg8E6heJiQjzi0Qebm30KoABHU!/r"/></div>
 
 ### 2.1 FUNSD [2]
 
@@ -222,23 +212,23 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ### 4.2 常见解决方案
 
-|    特征构成    |                             论文                             |       时间及会议        |                数据集                 |           评估方案           |  指标  |
-| :------------: | :----------------------------------------------------------: | :---------------------: | :-----------------------------------: | :--------------------------: | :----: |
-|      图像      | **Multi-scale Multi-task FCN for Semantic Page Segmentation and Table Detection [15]** |      2017<br>ICDAR      |                                       |                              |        |
-|      语义      |  **CloudScan - A configuration-free invoice analysis [16]**  |      2017<br>ICDAR      |                                       |                              |        |
-|   图像+结构    | **Visual Detection with Context for Document Layout Analysis [17]** | 2019<br>EMNLP<br>IJCNLP |  Self Annotated Scientific Articles   |         mAP(IoU@0.5)         | 70.3%  |
-|   图像+语义    | **Learning to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks [18]** |      2017<br>CVPR       |              ICDAR 2015               |        Pixel-wise IoU        | 92.75% |
-|                |                                                              |                         |               SectLabel               |              F1              | 89.35% |
-|                |                                                              |                         |               DSSE-200                |                              |        |
-|   图像+语义    |    **Chargrid: Towards Understanding 2D Documents [19]**     |      2018<br>EMNLP      |           Private Invoices            | Edit Distance based Accuracy | 62.96% |
-|   图像+语义    | **BERTgrid: Contextualized Embedding for 2D Document Representation and Understanding [20]** |     2019<br>NeurIPS     |                                       |                              |        |
-|   结构+语义    | **Cutie: Learning to understand documents with convolutional universal text information extractor [21]** |      2019<br>CVPR       |                                       |                              |        |
-| 图像+语义+结构 | **LayoutLM: Pre-training of Text and Layout for Document Image Understanding [1]** |       2020<br>KDD       |                 FUNSD                 |     Word-level F1 Score      | 79.27% |
-|                |                                                              |                         |                 SROIE                 |     Exact Match F1 Score     | 95.24% |
-|      其他      | **Graph convolution for multimodal information extraction from visually rich documents [22]** |      2019<br>NAACL      |    Value-Added Tax Invoices (VATI)    |                              |        |
-|                |                                                              |                         | International Purchase Receipts (IPR) |                              |        |
+|    特征构成    |                             论文                             |       时间及会议        |                数据集                 |           评估方案           |     指标      |
+| :------------: | :----------------------------------------------------------: | :---------------------: | :-----------------------------------: | :--------------------------: | :-----------: |
+|      图像      | **Multi-scale Multi-task FCN for Semantic Page Segmentation and Table Detection [15]** |      2017<br>ICDAR      |                                       |                              |               |
+|      语义      |  **CloudScan - A configuration-free invoice analysis [16]**  |      2017<br>ICDAR      |                                       |                              |               |
+|   图像+结构    | **Visual Detection with Context for Document Layout Analysis [17]** | 2019<br>EMNLP<br>IJCNLP |  Self Annotated Scientific Articles   |         mAP(IoU@0.5)         |     70.3%     |
+|   图像+语义    | **Learning to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks [18]** |      2017<br>CVPR       |              ICDAR 2015               |        Pixel-wise IoU        |    92.75%     |
+|                |                                                              |                         |               SectLabel               |              F1              |    89.35%     |
+|                |                                                              |                         |               DSSE-200                |        Pixel-wise IoU        |     75.9%     |
+|   图像+语义    |    **Chargrid: Towards Understanding 2D Documents [19]**     |      2018<br>EMNLP      |           Private Invoices            | Edit Distance based Accuracy |    62.96%     |
+|   图像+语义    | **BERTgrid: Contextualized Embedding for 2D Document Representation and Understanding [20]** |     2019<br>NeurIPS     |                                       |                              |               |
+|   结构+语义    | **Cutie: Learning to understand documents with convolutional universal text information extractor [21]** |      2019<br>CVPR       |                 SROIE                 |     Strict AP / Soft AP      | 86.7% / 92.7% |
+| 图像+语义+结构 | **LayoutLM: Pre-training of Text and Layout for Document Image Understanding [1]** |       2020<br>KDD       |                 FUNSD                 |     Word-level F1 Score      |    79.27%     |
+|                |                                                              |                         |                 SROIE                 |     Exact Match F1 Score     |    95.24%     |
+|      其他      | **Graph convolution for multimodal information extraction from visually rich documents [22]** |      2019<br>NAACL      |    Value-Added Tax Invoices (VATI)    |                              |               |
+|                |                                                              |                         | International Purchase Receipts (IPR) |                              |               |
 
-## 4. 基于自然语言处理的语义分割
+## 5. 基于自然语言处理的语义分割
 
 ​		基于自然语言处理的语义分割从属于后OCR的语义分割，其基本思想是将文字识别的结果转化为对应的词嵌入。通过命名实体识别（Named Entity Recognition）或槽填充的方法（Slot Filling）实现对文字区域的细分类。
 
@@ -266,21 +256,23 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ​		UBL Invoice和 PDF 一同通过GUI提供给用户，用户可以修正结果当中的任何Field。一旦用户修改了任何错误并接受了产出的Invoice，结果UBL 会被加入到系统的数据库当中。分类器利用N-grams和它们的标签来训练。对UBL文档当中每个field，作者考虑所有的N-grams，并检查解析后的文字内容是否和field匹配。通过这样的方式，GUI可以专注于使用户审查和纠正错误。这个系统相比于机器学习需要，更多的专注于用户体验。 
 
-## 5. 基于逐像素分类的语义分割
+## 6. 基于逐像素分类的语义分割
 
-- Multi-scale Multi-task FCN for Semantic Page Segmentation and Table Detection. ICDAR, 2017.
-- Learning  to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks. CVPR, 2017.
-- Fully Convolutional Neural Networks for Page Segmentation of Historical Document Images. DAS, 2018.
-- Multi-task layout analysis for historical handwritten documents using Fully Convolutional Networks. IJCAL, 2018.
+### 6.1 相关文章列表
+
 - Graphical object detection in document images. ICDAR, 2019.
 - Semantic Structure Extraction on Deformed Documents via Fully Convolutional Networks.
-- LayoutLM: Pre-training of Text and Layout for Document Image Understanding. KDD, 2020
+- LayoutLM: Pre-training of Text and Layout for Document Image Understanding. KDD, 2020.
+- Multi-scale Multi-task FCN for Semantic Page Segmentation and Table Detection. ICDAR, 2017.
+- Fully Convolutional Neural Networks for Page Segmentation of Historical Document Images. DAS, 2018.
+- Multi-task layout analysis for historical handwritten documents using Fully Convolutional Networks. IJCAL, 2018.
+- Learning  to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks. CVPR, 2017.
 
 ![1596419779084](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEGkTzgIs42v92hurpJuXmPoT7iZU.2ZyD59bsyY1ZeTncziquQQrtu6CqZ.sOWtAjFloZ2nW8s1mL28EzB8o0oc!/r)
 
 逐像素分类的语义分割方法通常
 
-### 5.1 基于视觉信息的方法
+### 6.2 基于视觉信息的方法
 
 #### Multi-scale Multi-task FCN [15]
 
@@ -296,7 +288,7 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ​		作者提出的MMFCN是一个统一的框架，结合了深度学习模型和启发式规则来同时处理语义分割和表格检测两个任务。其中，预测类别和轮廓检测两个任务作为神经网络框架的两个分支同时训练。而对于后面的条件随机场，其一元项由语义分割网络输出的特征来定义，其成对项由色差和轮廓特征来定义。
 
-### 5.2 融合视觉信息与语义信息的方法
+### 6.3 融合视觉信息与语义信息的方法
 
 #### Multimodal FCN [18]
 
@@ -318,14 +310,14 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 | Methods               | figure | text |
 | --------------------- | ------ | ---- |
-| Fernandez et al. [25] | 70.1   | 85.8 |
+| Fernandez et al. [20] | 70.1   | 85.8 |
 | Ours (binary)         | 77.1   | 91.0 |
 
 **SectLabel数据集上的F1分数表：**
 
 | Methods           | section | caption | list  | para. |
 | ----------------- | ------- | ------- | ----- | ----- |
-| Luong et al. [26] | 0.916   | 0.781   | 0.712 | 0.969 |
+| Luong et al. [21] | 0.916   | 0.781   | 0.712 | 0.969 |
 | Ours              | 0.919   | 0.893   | 0.793 | 0.969 |
 
 #### LayoutLM [1]
@@ -354,7 +346,7 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 <img src="https://i.loli.net/2020/08/05/QP6Zlcf1HpgYIXh.png" width="900" />
 
-## 6. 基于目标检测的语义分割
+## 7. 基于目标检测的语义分割
 
 - DeepDeSRT: Deep Learning for Detection and Structure Recognition of Tables in Document Images. ICDAR, 2017
 - Fast CNN-based document layout analysis. ICCV, 2017
@@ -382,7 +374,7 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ![1596592477753](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJkWGGOfEsT0z01H2Px.KG4thtKvcP8bYlmrjY2X3zNC0m*DFUoD8oPpc1iOGh.YtCyPgBClJoR92rLNkUgY*Ig!/b&bo=iAOsAYgDrAEDGTw!&rf=viewer_4)
 
-## 7. 参考文献
+## 8. 参考文献
 
 [1] Yiheng Xu, Minghao Li, Lei Cui, Shaohan Huang, Furu Wei and Ming Zhou - **LayoutLM: Pre-training of Text and Layout for Document Image Understanding** -  *ACM SIGKDD Conference on Knowledge Discovery and Data Mining*
 
