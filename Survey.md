@@ -10,7 +10,7 @@
 
 
 
-## 1.文档语义分割
+## 1. 文档语义分割
 
 ### 1.1 语义分割的定义
 
@@ -20,7 +20,7 @@
 
 视觉丰富文档 (Visually Rich Documents, VRDs) 指含有丰富的视觉和布局信息的文档，如票据、保险单、营业执照等。在这类文档中，文本的语义结构不仅取决于文字本身的含义，还取决于视觉特征。如某行文本的相对于其他文本的位置、文本的字体字号、是否倾斜或加粗等。处理这类文档，不能简单地将文本序列化为一维数据，否则必然会导致文档信息的损失。如下图所示，"$649.35"表示的是"Total Amount"，不仅是因为"$649.35"本身表示的是金钱的数量，还因为其左侧的"Total"字样，两者共同决定了"$649.35"是"Total Amount"的值。
 
-![example](https://i.loli.net/2020/08/04/XqMH6fKxbZiDehU.png)
+<img src="https://i.loli.net/2020/08/04/XqMH6fKxbZiDehU.png"  width="500" />
 
 ### 1.3 文档语义分割的定义
 
@@ -44,23 +44,7 @@
 
 ![1596436467871](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFMtLyATAFC70E*kNS9sWWLulUrFfd03bDi6qjuvg81lLwxkt4mqJ*ncEb2eMZasJRKydfhe*091iPLZrwwxAm0!/r )
 
-### 1.4 文档语义结构提取（Document Semantic Structure Extraction）
-
-​	文档语义结构提取致力于理解文档图像，其目标是将文档图像分割为感兴趣的区域，并识别每个区域的属性。它通常由两个步骤完成，第一步叫做版面分割（Page Segmentation）。文档分割基于视觉，致力于将文字，图片，表格和线条等区域区分开。第二步叫做逻辑结构分析（Logical Structure Analysis）。逻辑结构分析基于语义，把每个区域分类为语义相关的类别，诸如段落，标题，字幕，列表等。
-
-#### 1.4.1 版面分割
-
-​	版面分割从大类来分有三种方法：基于规则的方法，基于机器学习的方法和基于深度学习的方法。
-
-​	基于机器学习的方法通常由两种做法：自底向上和自顶向下。自底向上的做法首先基于局部特征（黑/白像素或连通分量）来检测单词，而后连续的将单词组成文字行和段落。然而，这样的方法常受限于鉴别结果，并且组合连通分量是十分耗时的。自顶向下的方法迭代地将文档分成列，块，文字行以及单词。使用这些方法无法很好的分割复杂版面的文档。
-
-​	基于深度学习的方法通常使用全卷积网络（Fully Convolutional Network）来进行版面分割。然而，这些方法十分受限于视觉线索，并不能利用文字的语义信息。
-
-#### 1.4.2 逻辑结构分析
-
-​	逻辑结构被定义为文档逻辑成分的层次结构，诸如段落，列表，标题等。早期的工作使用一系列基于位置，字体和文字的启发式规则。Shilman等人将文档版面建模为语法，并使用机器学习的方法最小化非法解析的代价。Luong等人提出基于索然规则使用条件随机场对每个句子进行联合标签。然而，这些方法的效果都受限于对手工设计的特征的依赖。
-
-## 2.数据集
+## 2. 数据集
 
 ​		语义分割模型的训练需要庞大的训练数据，从2010年开始陆续出现了若干具有一定规模的语义分割数据集。这些数据集有些专注于表格检测的任务，有些致力于版面分割的任务，近一两年来出现了拥有更多细粒度标签的大规模语义分割数据集，诸如PubLayNet和DocBank。随着时间的推移，数据集的制作方式由人工标注转变为基于规则的弱监督生成，数据集的大小与日俱增，训练出来的语义分割模型也随之越来越强大。这使得基于大规模多领域数据集的语义分割预训练模型的设想成为现实[1]。
 
@@ -72,7 +56,7 @@
 
 数据集共包含199份完全标注的表单，31485个单词，9707个语义实体以及5304个关系。语义实体的类有header, question, answer, other四种。
 
-![FUNSD_img](https://i.loli.net/2020/08/02/RrejCufWkhZFgMQ.png)
+<img src="https://i.loli.net/2020/08/02/RrejCufWkhZFgMQ.png"  width="700" />
 
 ### 2.2 ICDAR 2013 [3]
 
@@ -86,7 +70,7 @@
 
 该数据集出自ICDAR 2019 Robust Reading Competition的Task 3-Key Information Extraction from Scanned Receipts，训练集含626张图片，测试集含347张图片，标注的实体类有company，date，address，total四种。
 
-![SROIE_img](https://i.loli.net/2020/08/03/2bLSV4OdD8Khklu.jpg)
+<img src="https://i.loli.net/2020/08/03/2bLSV4OdD8Khklu.jpg"  width="400" />
 
     {
     	"company": "STARBUCKS STORE #10208",
@@ -109,7 +93,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 数据集提供了基于图片特征和语义特征的标签，包含从杂志和学术论文中获取的200个页面。页面中的区域标签有以下几种：figure, table, section, caption, list和paragraph，标注采用VOC数据集格式。图片标注示例如下图所示，其中红色表示figure，绿色表示section，蓝色表示text。
 
-![DSSE200](https://i.loli.net/2020/08/04/kJPe9w8rGabBFcy.png)
+<img src="https://i.loli.net/2020/08/04/kJPe9w8rGabBFcy.png"  width="500" />
 
 ### 2.8 Marmot [9]
 
@@ -172,6 +156,9 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 ```
 
 ​		准确率，召回率和精度的计算公式如下：
+$$
+Precision=\frac{TP}{TP+FP}\\Recall=\frac{TP}{TP+FN}\\F1=\frac{2*Precision*Recall}{Precision+Recall}
+$$
 
 ![](https://www.zhihu.com/equation?tex=P%3D%5Cfrac%7BTP%7D%7BTP%2BFP%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%A7%8D%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89)
 
@@ -189,6 +176,17 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ### Pixel-wise IoU
 
+IoU：全称为交并比（Intersection of Union），计算的是两个矩形区域交集和并集的比值，该指标用于衡量两个矩形区域的重叠度。下图左表示交集区域，下图右表示并集区域，计算公式为
+$$
+IoU=\frac{Area\ of\ Intersection}{Area\ of\ Union}
+$$
+<img src="https://i.loli.net/2020/08/05/6LIhKs42FC9yXUq.png"  width="500" />
+
+Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都是由许多像素点组成的集合，这些像素点并不一定能刚好组成一个矩形，所有就有了基于像素点的IoU。设Ground Truth的像素点组成集合A，Prediction的像素点组成集合B，则此时计算基于像素的IoU的公式为
+$$
+Pixel-wise\ IoU=\frac{A\cap B}{A\cup B}
+$$
+
 ### Precision - Recall - F1
 
 ​		准确率，召回率及其对应的F1分数通常用于基于语义分割的方法，每种语义类别都需要计算这组分数作为该类别的评估指标。这一系列指标可以有两种计算方式，分别是在一定IoU阈值下基于个数的计算和基于面积的计算。前者更关注模型对每一个实体的预测情况，对能否正确预测每个实体比较敏感。相比之下，后者更关注模型的总体表现。
@@ -198,6 +196,10 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 ![1596513154629](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqfMqTPnSmdq.h7NVm53LLRLNU1RTMelLJllRtXf9Bemt2sbIOLI69jV46ynSw6Ko2svs6vPTzJJqRaorCR00N3Q!/b&bo=*gY1Av4GNQIDCSw!&rf=viewer_4)
 
 ### Exact Match F1 Score
+
+上述的评估指标都是对于“关键信息定位”这一子任务而言，而非IEVRDs(Information Extraction from Virtually Rich Documents)这个整体任务。比如说mAP只是为了衡量模型提取出来的框和真实框的重叠度，并不关心后续的OCR是否能够正确提取文本。而Exact Match F1 Score旨在衡量模型处理IEVRDs这个整体任务的能力（不仅与“关键信息定位”有关，还与OCR以及诸多后处理相关）。该评测指标只关心最终的提取结果，只有当预测的文本与Ground Truth的文本完全相同时，才认为该预测结果正确。例如，提取发票中Fare字段对应的值，Ground Truth为"$4.95"，若预测值为"4.95"，认为该预测结果错误，只有当预测值刚好为"$4.95"时，才认为预测正确。
+
+### Edit-Distance Based Accuracy
 
 
 
@@ -293,7 +295,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 
 
-## 6.基于目标检测的语义分割
+## 6. 基于目标检测的语义分割
 
 - DeepDeSRT: Deep Learning for Detection and Structure Recognition of Tables in Document Images. ICDAR, 2017
 - Fast CNN-based document layout analysis. ICCV, 2017
@@ -321,7 +323,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ![1596592477753](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJkWGGOfEsT0z01H2Px.KG4thtKvcP8bYlmrjY2X3zNC0m*DFUoD8oPpc1iOGh.YtCyPgBClJoR92rLNkUgY*Ig!/b&bo=iAOsAYgDrAEDGTw!&rf=viewer_4)
 
-## 7.参考文献
+## 7. 参考文献
 
 [1] Yiheng Xu, Minghao Li, Lei Cui, Shaohan Huang, Furu Wei and Ming Zhou - **LayoutLM: Pre-training of Text and Layout for Document Image Understanding** -  *ACM SIGKDD Conference on Knowledge Discovery and Data Mining*
 
