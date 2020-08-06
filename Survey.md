@@ -172,27 +172,37 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 - Pixel-level：
   - 对每个类别，设整张图片的所有像素点组成集合S，Ground Truth的所有像素组成集合A，Prediction的所有像素组成集合B，A∩B为TP，A-B为FN，B-A为FP，S-A-B为TN；
-  - 对每个类别分别根据上述公式计算Precision，Recall和F1。
+  - 对每个类别分别根据上述公式计算Precision，Recall和F1.
 
 - Word-level：
   - Ground Truth中的标注格式为每个单词有一个边界框；
-  - 对某个类所有Ground Truth框，若与它IoU最大的Prediction框大于某阈值，则TP个数加1，每个Prediction只负责一个Ground Truth框；
-  - 在上述基础上计算Precision，Recall和F1。
+  - 对某个类所有Ground Truth框，若它与所有Prediction框的IoU最大值大于某阈值，则TP个数加1，每个Prediction只负责一个Ground Truth框；
+  - 在上述基础上计算Precision，Recall和F1.
 
 - Entity-level：
   - Ground Truth中的标注格式为每个实体有一个边界框；
   - 对某个类所有Ground Truth框，若与它IoU最大的Prediction框大于某阈值，则TP个数加1，每个Prediction只负责一个Ground Truth框；
-  - 在上述基础上计算Precision，Recall和F1。
-
-### Exact Match F1 Score
-
-​		上述的评估指标都是对于“关键信息定位”这一子任务而言，而非IEVRDs(Information Extraction from Virtually Rich Documents)这个整体任务。比如说mAP只是为了衡量模型提取出来的框和真实框的重叠度，并不关心后续的OCR是否能够正确提取文本。而Exact Match F1 Score旨在衡量模型处理IEVRDs这个整体任务的能力（不仅与“关键信息定位”有关，还与OCR以及诸多后处理相关）。该评测指标只关心最终的提取结果，只有当预测的文本与Ground Truth的文本完全相同时，才认为该预测结果正确。例如，提取发票中Fare字段对应的值，Ground Truth为"$4.95"，若预测值为"4.95"，认为该预测结果错误，只有当预测值刚好为"$4.95"时，才认为预测正确。
+  - 在上述基础上计算Precision，Recall和F1.
 
 ### Edit-Distance Based Accuracy
 
 <div align="center"><img src="https://i.loli.net/2020/08/05/KsHvkjDUw3aWfGh.png"  width="600" /></div>
 
-​		
+​		该方法中的N为ground-truth中每个语义类别的所有实例数量，#[insertions], #[deletions] 和 #[modifications] 为预测实例与ground-truth实例的编辑距离代价。
+
+### Strict AP
+
+​		上述的评估指标都是对于“关键信息定位”这一子任务而言，而非IEVRDs(Information Extraction from Virtually Rich Documents)这个整体任务。比如说mAP只是为了衡量模型提取出来的框和真实框的重叠度，并不关心后续的OCR是否能够正确提取文本。而Exact Match F1 Score旨在衡量模型处理IEVRDs这个整体任务的能力（不仅与“关键信息定位”有关，还与OCR以及诸多后处理相关）。该评测指标只关心最终的提取结果，只有当预测的文本与Ground Truth的文本完全相同时，才认为该预测结果正确。
+
+​		对于某张文档图片的某个关键字，只有当提取出来的值与Ground-Truth完全相同时，才认为该预测结果是正确的。例如，提取发票中Fare字段对应的值，Ground Truth为"$4.95"，若预测值为"4.95"，则认为该预测结果错误，只有当预测值刚好为"$4.95"时，才认为预测正确。以上述标准计算每一个类的Precision，然后取多个类别AP的平均值，即为mAP.
+
+### Soft AP
+
+​		该指标和Strict AP的不同点在于，对于预测正确的判定标准有所放宽。例如提取发票中Fare字段对应的值，Ground Truth为"$4.95"，认为规定允许预测之中有多余token的存在，若预测值为“Fare: $4.95”，则认为该预测结果正确。这种评估方案具有一定的“宽容”，允许了某些可以通过后处理去掉的多余token存在。
+
+### Exact Match F1 Score
+
+​		在上述Strict AP的基础上，结合Precision，Recall和F1的定义，计算得到的F1值即为Exact Match F1 Score.
 
 ## 4. 解决方案
 
@@ -260,9 +270,37 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​		UBL Invoice和 PDF 一同通过GUI提供给用户，用户可以修正结果当中的任何Field。一旦用户修改了任何错误并接受了产出的Invoice，结果UBL 会被加入到系统的数据库当中。分类器利用N-grams和它们的标签来训练。对UBL文档当中每个field，作者考虑所有的N-grams，并检查解析后的文字内容是否和field匹配。通过这样的方式，GUI可以专注于使用户审查和纠正错误。这个系统相比于机器学习需要，更多的专注于用户体验。 
 
-## 6. 基于逐像素分类的语义分割
+## 6. 基于目标检测的语义分割
 
-### 6.1 相关文章列表
+- DeepDeSRT: Deep Learning for Detection and Structure Recognition of Tables in Document Images. ICDAR, 2017
+- Fast CNN-based document layout analysis. ICCV, 2017
+- DeCNT: Deep deformable CNN for table detection. IEEE Access, 2018.
+- Graphical object detection using Mask R-CNN ICDAR, 2019.
+- Table detection using YOLO. ICDAR, 2019.
+
+![1596419804068]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFuIMA1KftuWbGVyiqGD1NgKgRj5zXHYB1nnuwxYpisFFFPyL.K5C8v.MP2T.GsMxup7Zq7yOh58BkTrqQW*FF4!/r )
+
+#### Visual Detection with Context for Document Layout Analysis [17]
+
+​		这篇文章中，作者提出了将上下文信息加入到特征当中用于Faster RCNN对bounding box的分类和回归；除此之外，作者标注了一个新的论文数据集，其中包括9个类别，100篇文章的822个页面。实验结果表明，结合了上下文信息的特征使模型在作者制作的数据集上的mAP提升了23.9%。并且，该方法比基于文本的方法快14倍。
+
+<div align="center"><img src="http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqbsZaGi7GGusZkdsW6ISQWCwxb1*ErwkLbgUStPdp2NgxQpiRtNPeLwEwkVnuAtCMEOCx9iutEl6qPyerMMqESQ!/b&bo=uwERAbsBEQEDCSw!&rf=viewer_4" /></div>
+
+​		Baseline的mAP为46.38%，表现最好的类是“正文”，其AP为87.49%，表现最糟糕的类是“作者”，其AP为1.22%。作者融合到特征中的上下文信息如下：
+
+- 页面上下文：当前页的页码和文档的总页面数，二者均被标准化到数据集中文档的平均页数：8.22。
+
+- 边界框上下文：RoI的位置和大小，均被标准化到图像的维度。
+
+  二者被加入到了用于批RoIs的池化后特征中，而后用于分类和回归。
+
+  融合了上下文特征的模型分数如下：mAP为70.3%，表现最好的类是”正文“，其AP为93.58%，表现最糟糕的类是"作者"，其AP为10.34%。
+
+<div align="center"><img src="http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJkWGGOfEsT0z01H2Px.KG4thtKvcP8bYlmrjY2X3zNC0m*DFUoD8oPpc1iOGh.YtCyPgBClJoR92rLNkUgY*Ig!/b&bo=iAOsAYgDrAEDGTw!&rf=viewer_4" /></div>
+
+## 7. 基于逐像素分类的语义分割
+
+### 7.1 相关文章列表
 
 - Graphical object detection in document images. ICDAR, 2019.
 - Semantic Structure Extraction on Deformed Documents via Fully Convolutional Networks.
@@ -276,7 +314,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 逐像素分类的语义分割方法通常
 
-### 6.2 基于视觉信息的方法
+### 7.2 基于视觉信息的方法
 
 #### Multi-scale Multi-task FCN [15]
 
@@ -292,7 +330,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​		作者提出的MMFCN是一个统一的框架，结合了深度学习模型和启发式规则来同时处理语义分割和表格检测两个任务。其中，预测类别和轮廓检测两个任务作为神经网络框架的两个分支同时训练。而对于后面的条件随机场，其一元项由语义分割网络输出的特征来定义，其成对项由色差和轮廓特征来定义。
 
-### 6.3 融合视觉信息与语义信息的方法
+### 7.3 融合视觉信息与语义信息的方法
 
 #### LayoutLM [1]
 
@@ -360,43 +398,11 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 <div align="center"><img src="https://i.loli.net/2020/08/05/DtT8rvVQakYCypB.png"  width="1000" /></div>
 
-​		此论文选取了12k张不同语言的发票并进行人工标注，包括Invoice Number, Invoice Date, Invoice Amount, Vendor Name, Vendor Address, Line-item Description, Line-item Quantity, Line-item Amount 8个类。论文采用类编辑距离的准确度作为评估标准。对于Ground Truth和Prediction，Ground Truth中总的单词数为N，计算插入、删除、修改的单词数目，Accuracy计算方法为：
-
-<div align="center"><img src="https://i.loli.net/2020/08/05/KsHvkjDUw3aWfGh.png"  width="600" /></div>
-
-Chargrid在此数据集上的实验结果如下图所示：
+​		此论文选取了12k张不同语言的发票进行人工标注，包括Invoice Number, Invoice Date, Invoice Amount, Vendor Name, Vendor Address, Line-item Description, Line-item Quantity, Line-item Amount 8个类。论文采用类编辑距离的准确度作为评估标准。Chargrid在此数据集上的实验结果如下图所示：
 
 <div align="center"><img src="https://i.loli.net/2020/08/05/meOF1NHWglyTi5v.png"  width="1600" /></div>
 
 #### Bertgrid [20]
-
-## 7. 基于目标检测的语义分割
-
-- DeepDeSRT: Deep Learning for Detection and Structure Recognition of Tables in Document Images. ICDAR, 2017
-- Fast CNN-based document layout analysis. ICCV, 2017
-- DeCNT: Deep deformable CNN for table detection. IEEE Access, 2018.
-- Graphical object detection using Mask R-CNN ICDAR, 2019.
-- Table detection using YOLO. ICDAR, 2019.
-
-![1596419804068]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFuIMA1KftuWbGVyiqGD1NgKgRj5zXHYB1nnuwxYpisFFFPyL.K5C8v.MP2T.GsMxup7Zq7yOh58BkTrqQW*FF4!/r )
-
-#### Visual Detection with Context for Document Layout Analysis [17]
-
-​		这篇文章中，作者提出了将上下文信息加入到特征当中用于Faster RCNN对bounding box的分类和回归；除此之外，作者标注了一个新的论文数据集，其中包括9个类别，100篇文章的822个页面。实验结果表明，结合了上下文信息的特征使模型在作者制作的数据集上的mAP提升了23.9%。并且，该方法比基于文本的方法快14倍。
-
-<div align="center"><img src="http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqbsZaGi7GGusZkdsW6ISQWCwxb1*ErwkLbgUStPdp2NgxQpiRtNPeLwEwkVnuAtCMEOCx9iutEl6qPyerMMqESQ!/b&bo=uwERAbsBEQEDCSw!&rf=viewer_4" /></div>
-
-​		Baseline的mAP为46.38%，表现最好的类是“正文”，其AP为87.49%，表现最糟糕的类是“作者”，其AP为1.22%。作者融合到特征中的上下文信息如下：
-
-- 页面上下文：当前页的页码和文档的总页面数，二者均被标准化到数据集中文档的平均页数：8.22。
-
-- 边界框上下文：RoI的位置和大小，均被标准化到图像的维度。
-
-  二者被加入到了用于批RoIs的池化后特征中，而后用于分类和回归。
-
-  融合了上下文特征的模型分数如下：mAP为70.3%，表现最好的类是”正文“，其AP为93.58%，表现最糟糕的类是"作者"，其AP为10.34%。
-
-<div align="center"><img src="http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJkWGGOfEsT0z01H2Px.KG4thtKvcP8bYlmrjY2X3zNC0m*DFUoD8oPpc1iOGh.YtCyPgBClJoR92rLNkUgY*Ig!/b&bo=iAOsAYgDrAEDGTw!&rf=viewer_4" /></div>
 
 ## 8. 参考文献
 
