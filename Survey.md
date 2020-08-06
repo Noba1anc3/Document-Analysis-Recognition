@@ -93,7 +93,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 数据集提供了基于图片特征和语义特征的标签，包含从杂志和学术论文中获取的200个页面。页面中的区域标签有以下几种：figure, table, section, caption, list和paragraph，标注采用VOC数据集格式。图片标注示例如下图所示，其中红色表示figure，绿色表示section，蓝色表示text。
 
-<img src="https://i.loli.net/2020/08/04/kJPe9w8rGabBFcy.png"  width="500" />
+<img src="https://i.loli.net/2020/08/04/kJPe9w8rGabBFcy.png"  width="500" align= "center"/>
 
 ### 2.8 Marmot [9]
 
@@ -156,9 +156,6 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 ```
 
 ​		准确率，召回率和精度的计算公式如下：
-$$
-Precision=\frac{TP}{TP+FP}\\Recall=\frac{TP}{TP+FN}\\F1=\frac{2*Precision*Recall}{Precision+Recall}
-$$
 
 ![](https://www.zhihu.com/equation?tex=P%3D%5Cfrac%7BTP%7D%7BTP%2BFP%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%A7%8D%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89)
 
@@ -176,11 +173,9 @@ $$
 
 ### Pixel-wise IoU
 
-IoU：全称为交并比（Intersection of Union），计算的是两个矩形区域交集和并集的比值，该指标用于衡量两个矩形区域的重叠度。下图左表示交集区域，下图右表示并集区域，计算公式为
-$$
-IoU=\frac{Area\ of\ Intersection}{Area\ of\ Union}
-$$
-<img src="https://i.loli.net/2020/08/05/6LIhKs42FC9yXUq.png"  width="500" />
+IoU：全称为交并比（Intersection of Union），计算的是两个矩形区域交集和并集的比值，该指标用于衡量两个矩形区域的重叠度。下图左表示交集区域，下图右表示并集区域，计算公式为：
+
+![](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEO81hAUf4vC8RfFsAkAgImplXsKOiyQLcbhbM2LneakPXyM*lpzDw0lXENMCIvjs3lvfpYymL.VQmDRiBLhHUnc!/r)<img src="https://i.loli.net/2020/08/05/6LIhKs42FC9yXUq.png"  width="500" align= "center" />
 
 Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都是由许多像素点组成的集合，这些像素点并不一定能刚好组成一个矩形，所有就有了基于像素点的IoU。设Ground Truth的像素点组成集合A，Prediction的像素点组成集合B，则此时计算基于像素的IoU的公式为
 $$
