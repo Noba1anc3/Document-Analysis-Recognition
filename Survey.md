@@ -26,8 +26,9 @@
 
 ​		文档语义分割在学术上尚且没有一个统一的定义，但总体而言都是在解决同一个问题，即在文档图像上的语义分割任务。进一步地，文档语义分割可以分类为OCR前的语义分割和OCR后的语义分割，在此选取两篇论文中的定义来阐述。
 
-<div align="center"><img src=" http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK0sKe8cnyDZUZBs1KWk64OBd5iMFqfGlMS41sRCqxvSi2ZXXarVpNbiuOebb0RXlfjpeOghrKPQQ6J4SMSI7AI!/r" /></div>
-<div align="center"><img src=" http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrENGrtySjFhQ8TF5UgHj8hIqSzj8RsLRO*cCOzpvtTDRvk8Eri*I3B5siBs6QSGOpq.kkLpTmbHdi8IQQ55ir0ig!/b&bo=SQOMAEkDjAADGTw!&rf=viewer_4" /></div>
+<div align="center"><img src="http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK0sKe8cnyDZUZBs1KWk64OBd5iMFqfGlMS41sRCqxvSi2ZXXarVpNbiuOebb0RXlfjpeOghrKPQQ6J4SMSI7AI!/r" /></div>
+
+<div align="center"><img src="http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrENGrtySjFhQ8TF5UgHj8hIqSzj8RsLRO*cCOzpvtTDRvk8Eri*I3B5siBs6QSGOpq.kkLpTmbHdi8IQQ55ir0ig!/b&bo=SQOMAEkDjAADGTw!&rf=viewer_4" /></div>
 
 #### 1.3.1 OCR前语义分割
 
