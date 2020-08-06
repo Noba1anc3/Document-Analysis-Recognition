@@ -154,13 +154,13 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ### Pixel-wise IoU
 
-IoU：全称为交并比（Intersection of Union），计算的是两个矩形区域交集和并集的比值，该指标用于衡量两个矩形区域的重叠度。下图左表示交集区域，下图右表示并集区域，计算公式为：
+​		IoU：全称为交并比（Intersection of Union），计算的是两个矩形区域交集和并集的比值，该指标用于衡量两个矩形区域的重叠度。下图左表示交集区域，下图右表示并集区域，计算公式为：
 
 ![](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEO81hAUf4vC8RfFsAkAgImplXsKOiyQLcbhbM2LneakPXyM*lpzDw0lXENMCIvjs3lvfpYymL.VQmDRiBLhHUnc!/r)
 
 <div align="center"><img src="https://i.loli.net/2020/08/05/6LIhKs42FC9yXUq.png"  width="500" /></div>
 
-Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都是由许多像素点组成的集合，这些像素点并不一定能刚好组成一个矩形，所有就有了基于像素点的IoU。设Ground Truth的像素点组成集合A，Prediction的像素点组成集合B，则此时计算基于像素的IoU的公式为
+​		Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都是由许多像素点组成的集合，这些像素点并不一定能刚好组成一个矩形，所有就有了基于像素点的IoU。设Ground Truth的像素点组成集合A，Prediction的像素点组成集合B，则此时计算基于像素的IoU的公式为：
 
 ![](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrECsH8kB1cu1ZBKbOJ86Qo5273JqtJC.uODZ1ar.nE0kcr5n0Z7qsbYW8TTaUZc2qjXrkgtqBILh82b1YkdKKfjM!/r)
 
@@ -186,9 +186,13 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ### Exact Match F1 Score
 
-上述的评估指标都是对于“关键信息定位”这一子任务而言，而非IEVRDs(Information Extraction from Virtually Rich Documents)这个整体任务。比如说mAP只是为了衡量模型提取出来的框和真实框的重叠度，并不关心后续的OCR是否能够正确提取文本。而Exact Match F1 Score旨在衡量模型处理IEVRDs这个整体任务的能力（不仅与“关键信息定位”有关，还与OCR以及诸多后处理相关）。该评测指标只关心最终的提取结果，只有当预测的文本与Ground Truth的文本完全相同时，才认为该预测结果正确。例如，提取发票中Fare字段对应的值，Ground Truth为"$4.95"，若预测值为"4.95"，认为该预测结果错误，只有当预测值刚好为"$4.95"时，才认为预测正确。
+​		上述的评估指标都是对于“关键信息定位”这一子任务而言，而非IEVRDs(Information Extraction from Virtually Rich Documents)这个整体任务。比如说mAP只是为了衡量模型提取出来的框和真实框的重叠度，并不关心后续的OCR是否能够正确提取文本。而Exact Match F1 Score旨在衡量模型处理IEVRDs这个整体任务的能力（不仅与“关键信息定位”有关，还与OCR以及诸多后处理相关）。该评测指标只关心最终的提取结果，只有当预测的文本与Ground Truth的文本完全相同时，才认为该预测结果正确。例如，提取发票中Fare字段对应的值，Ground Truth为"$4.95"，若预测值为"4.95"，认为该预测结果错误，只有当预测值刚好为"$4.95"时，才认为预测正确。
 
 ### Edit-Distance Based Accuracy
+
+<div align="center"><img src="https://i.loli.net/2020/08/05/KsHvkjDUw3aWfGh.png"  width="600" /><div>
+
+​		
 
 ## 4. 解决方案
 
@@ -290,6 +294,32 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ### 6.3 融合视觉信息与语义信息的方法
 
+#### LayoutLM [1]
+
+​		LayouLM是结合了文档视觉结构以及文本语义信息的通用文档预训练模型。它在Bert模型基础上添加了2-D Position Embedding 和Image Embedding两种新的Embedding层来有效地结合文档视觉和结构信息。
+
+- 2-D Position Embedding生成方法：通过OCR获取每个文字行内的所有单词以其边界框坐标(x0, y0, x1, y1)，将文字行内所有单词的(xmin, ymin, xmax, ymax)分别做embedding，这4个embedding结果的和作为最终的2-D Position Embedding；
+- Image Embedding生成方法：采用Faster RCNN对每个单词区域和整张文档图像提取特征；
+- 将2-D Position Embedding通过预训练的Bert得到LayoutLM Embedding，对LayoutLM Embedding和Image Embedding求和得到最终特征，用于开展下游任务。
+
+<img src="https://i.loli.net/2020/08/05/meYX1cswORyoH53.png" width="1000" />
+
+​		在预训练阶段，LayoutLM采用了MVLM遮罩式视觉语言模型和MDC多标签文档分类两个任务，并以IIT-CDIP 数据集作为训练集进行完全预训练。
+
+​		论文将预训练模型迁移到表单理解、票据理解两个下游任务中并且都取得了目前的最佳成绩。
+
+**表单理解（Form Understanding）**
+
+​		在表单理解任务上，使用 FUNSD 作为测试数据集，该数据集中的199个标注文档包含31,485个词和9,707个语义实体。在该数据集上，需要对数据集中的表单进行键值对（key-value）抽取。通过引入位置信息的预训练，LayoutLM 在该任务上取得了显著的提升。实验结果见下表：
+
+<div align="center"><img src="https://i.loli.net/2020/08/05/nSFa2G5V8qAJTd1.png"  width="900" /></div>
+
+**票据理解 （Receipt Understanding）**
+
+​		在票据理解任务中，选择 SROIE 比赛数据集作为数据集，其包含1000张已标注的票据，每张票据标注了company，date，address，total四个语义实体。通过在该数据集上微调，LayoutLM的表现比 RDCL 2019(ICDAR Competition on Recognition of Documents with Complex Layouts) 比赛第一名F1 值高1.2个百分点，达到95.24%。其实验结果如下：
+
+<div align="center"><img src="https://i.loli.net/2020/08/05/QP6Zlcf1HpgYIXh.png"  width="900" /></div>
+
 #### Multimodal FCN [18]
 
 ​	MFCNN以端到端的方式，逐像素同时辨别其基于视觉和语义的类别。它是一个泛化的页面分割模型，可以基于语义功能对文字区域指定特定的标签以进行细粒度的识别。
@@ -320,31 +350,25 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 | Luong et al. [21] | 0.916   | 0.781   | 0.712 | 0.969 |
 | Ours              | 0.919   | 0.893   | 0.793 | 0.969 |
 
-#### LayoutLM [1]
+#### Chargrid [19]
 
-​		LayouLM是结合了文档视觉结构以及文本语义信息的通用文档预训练模型。它在Bert模型基础上添加了2-D Position Embedding 和Image Embedding两种新的Embedding层来有效地结合文档视觉和结构信息。
+​		Chargrid将文档理解看作是每页文档上字符的实例分割。它提出一种新的文档表示形式——Chargrid，即将每页文档编码成二维的字符方格。每个字符方格的像素是由包含每个字符的最小框中的字符映射而得的，不在字符框中的像素值映射为0。下图为Chargrid的一个例子。
 
-- 2-D Position Embedding生成方法：通过OCR获取每个文字行内的所有单词以其边界框坐标(x0, y0, x1, y1)，将文字行内所有单词的(xmin, ymin, xmax, ymax)分别做embedding，这4个embedding结果的和作为最终的2-D Position Embedding；
-- Image Embedding生成方法：采用Faster RCNN对每个单词区域和整张文档图像提取特征；
-- 将2-D Position Embedding通过预训练的Bert得到LayoutLM Embedding，对LayoutLM Embedding和Image Embedding求和得到最终特征，用于开展下游任务。
+<div align="center"><img src="https://i.loli.net/2020/08/05/k3SyK5hxuNYpfvi.png"  width="600" /></div>
 
-<img src="https://i.loli.net/2020/08/05/meYX1cswORyoH53.png" width="1000" />
+​		论文提出的Chargrid-Net网络结构如下图所示，该网络以Chargrid作为输入，包含一个Encoder和两个Decoder。采用全卷积网络预测像素类别和边框回归。
 
-​		在预训练阶段，LayoutLM采用了MVLM遮罩式视觉语言模型和MDC多标签文档分类两个任务，并以IIT-CDIP 数据集作为训练集进行完全预训练。
+<div align="center"><img src="https://i.loli.net/2020/08/05/DtT8rvVQakYCypB.png"  width="1000" /></div>
 
-​		论文将预训练模型迁移到表单理解、票据理解两个下游任务中并且都取得了目前的最佳成绩。
+​		此论文选取了12k张不同语言的发票并进行人工标注，包括Invoice Number, Invoice Date, Invoice Amount, Vendor Name, Vendor Address, Line-item Description, Line-item Quantity, Line-item Amount 8个类。论文采用类编辑距离的准确度作为评估标准。对于Ground Truth和Prediction，Ground Truth中总的单词数为N，计算插入、删除、修改的单词数目，Accuracy计算方法为：
 
-**表单理解（Form Understanding）**
+<div align="center"><img src="https://i.loli.net/2020/08/05/KsHvkjDUw3aWfGh.png"  width="600" /></div>
 
-​		在表单理解任务上，使用 FUNSD 作为测试数据集，该数据集中的199个标注文档包含31,485个词和9,707个语义实体。在该数据集上，需要对数据集中的表单进行键值对（key-value）抽取。通过引入位置信息的预训练，LayoutLM 在该任务上取得了显著的提升。实验结果见下表：
+Chargrid在此数据集上的实验结果如下图所示：
 
-<div align="center"><img src="https://i.loli.net/2020/08/05/nSFa2G5V8qAJTd1.png"  width="900" /></div>
+<div align="center"><img src="https://i.loli.net/2020/08/05/meOF1NHWglyTi5v.png"  width="1600" /></div>
 
-**票据理解 （Receipt Understanding）**
-
-​		在票据理解任务中，选择 SROIE 比赛数据集作为数据集，其包含1000张已标注的票据，每张票据标注了company，date，address，total四个语义实体。通过在该数据集上微调，LayoutLM的表现比 RDCL 2019(ICDAR Competition on Recognition of Documents with Complex Layouts) 比赛第一名F1 值高1.2个百分点，达到95.24%。其实验结果如下：
-
-<div align="center"><img src="https://i.loli.net/2020/08/05/QP6Zlcf1HpgYIXh.png"  width="900" /></div>
+#### Bertgrid [20]
 
 ## 7. 基于目标检测的语义分割
 
