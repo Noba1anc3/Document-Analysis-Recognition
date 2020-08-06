@@ -26,9 +26,9 @@
 
 ​		文档语义分割在学术上尚且没有一个统一的定义，但总体而言都是在解决同一个问题，即在文档图像上的语义分割任务。进一步地，文档语义分割可以分类为OCR前的语义分割和OCR后的语义分割，在此选取两篇论文中的定义来阐述。
 
-<div align="center"><img src="http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK0sKe8cnyDZUZBs1KWk64OBd5iMFqfGlMS41sRCqxvSi2ZXXarVpNbiuOebb0RXlfjpeOghrKPQQ6J4SMSI7AI!/r" /></div>
+<div align="center"><img src=" http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEK0sKe8cnyDZUZBs1KWk64OBd5iMFqfGlMS41sRCqxvSi2ZXXarVpNbiuOebb0RXlfjpeOghrKPQQ6J4SMSI7AI!/r" /></div>
 
-<div align="center"><img src="http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrENGrtySjFhQ8TF5UgHj8hIqSzj8RsLRO*cCOzpvtTDRvk8Eri*I3B5siBs6QSGOpq.kkLpTmbHdi8IQQ55ir0ig!/b&bo=SQOMAEkDjAADGTw!&rf=viewer_4" /></div>
+<div align="center"><img src=" http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrENGrtySjFhQ8TF5UgHj8hIqSzj8RsLRO*cCOzpvtTDRvk8Eri*I3B5siBs6QSGOpq.kkLpTmbHdi8IQQ55ir0ig!/b&bo=SQOMAEkDjAADGTw!&rf=viewer_4" /></div>
 
 #### 1.3.1 OCR前语义分割
 
@@ -179,11 +179,23 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ### Precision - Recall - F1
 
-​		准确率，召回率及其对应的F1分数通常用于基于语义分割的方法，每种语义类别都需要计算这组分数作为该类别的评估指标。这一系列指标可以有两种计算方式，分别是在一定IoU阈值下基于个数的计算和基于面积的计算。前者更关注模型对每一个实体的预测情况，对能否正确预测每个实体比较敏感。相比之下，后者更关注模型的总体表现。
+​		准确率，召回率及其对应的F1分数通常用于基于语义分割的方法，可以从像素、单词或实体三个角度计算上述指标：
 
-​		根据任务场景和评估角度的不同可以将这组指标分为单词级和实体级。对于OCR前的语义分割，通常只能计算实体级的指标。而对于OCR后的语义分割，由于有文字检测结果的辅助，还可以计算单词级的指标。一般来说，单词级的指标更关注模型的总体表现，而实体级的指标更关注模型对每个语义类型的找准找全情况。
+<div align="center"><img src="http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqfMqTPnSmdq.h7NVm53LLRLNU1RTMelLJllRtXf9Bemt2sbIOLI69jV46ynSw6Ko2svs6vPTzJJqRaorCR00N3Q!/b&bo=*gY1Av4GNQIDCSw!&rf=viewer_4"  width="700" /></div>
 
-![1596513154629](http://m.qpic.cn/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/bqQfVz5yrrGYSXMvKr.cqfMqTPnSmdq.h7NVm53LLRLNU1RTMelLJllRtXf9Bemt2sbIOLI69jV46ynSw6Ko2svs6vPTzJJqRaorCR00N3Q!/b&bo=*gY1Av4GNQIDCSw!&rf=viewer_4)
+- Pixel-level：
+  - 对每个类别，设整张图片的所有像素点组成集合S，Ground Truth的所有像素组成集合A，Prediction的所有像素组成集合B，A∩B为TP，A-B为FN，B-A为FP，S-A-B为TN；
+  - 对每个类别分别根据上述公式计算Precision，Recall和F1。
+
+- Word-level：
+  - Ground Truth中的标注格式为每个单词有一个边界框；
+  - 对于某个类所有Ground Truth框，若与它IoU最大的Prediction框大于某阈值，则TP个数加1，每个Prediction只能负责一个Ground Truth框；
+  - 在上述基础上计算Precision，Recall和F1。
+
+- Entity-level：
+  - Ground Truth中的标注格式为每个实体有一个边界框；
+  - 对于某个类所有Ground Truth框，若与它IoU最大的Prediction框大于某阈值，则TP个数加1，每个Prediction只能负责一个Ground Truth框；
+  - 在上述基础上计算Precision，Recall和F1。
 
 ### Exact Match F1 Score
 
