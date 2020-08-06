@@ -150,11 +150,11 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​		准确率，召回率和精度的计算公式如下：
 
-<div align="center"><img src="https://www.zhihu.com/equation?tex=P%3D%5Cfrac%7BTP%7D%7BTP%2BFP%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%A7%8D%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89"/><div>
+<div align="center"><img src="https://www.zhihu.com/equation?tex=P%3D%5Cfrac%7BTP%7D%7BTP%2BFP%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%A7%8D%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89"/></div>
 
-<div align="center"><img src="https://www.zhihu.com/equation?tex=R%3D%5Cfrac%7BTP%7D%7BTP%2BFN%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E4%B8%AD%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89"/><div>
+<div align="center"><img src="https://www.zhihu.com/equation?tex=R%3D%5Cfrac%7BTP%7D%7BTP%2BFN%7D%EF%BC%8C%EF%BC%88%E5%9C%A8%E5%AE%9E%E9%99%85%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E4%B8%AD%E9%A2%84%E6%B5%8B%E4%B8%BA%E6%AD%A3%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%89"/></div>
 
-<div align="center"><img src="https://www.zhihu.com/equation?tex=accuracy%3D%5Cfrac%7BTP%2BTN%7D%7BTP%2BTN%2BFP%2BFN%7D%EF%BC%8C%EF%BC%88%E9%80%9A%E5%B8%B8%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F%EF%BC%89"/><div>
+<div align="center"><img src="https://www.zhihu.com/equation?tex=accuracy%3D%5Cfrac%7BTP%2BTN%7D%7BTP%2BTN%2BFP%2BFN%7D%EF%BC%8C%EF%BC%88%E9%80%9A%E5%B8%B8%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F%EF%BC%89"/></div>
 
 ​		Precision度量的是「查准率」，在所有检测出的正样本中是不是实际都为正样本。比如在垃圾邮件判断等场景中，要求有更高的precision，确保放到回收站的都是垃圾邮件。 
 
