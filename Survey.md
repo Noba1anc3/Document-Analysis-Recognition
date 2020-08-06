@@ -116,10 +116,10 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​		TableBank是由北航与微软亚洲研究院联合提出的表格检测与识别新型数据集。该数据集是通过对网上的Word和Latex文档进行弱监督而建立的，不同于传统的弱监督数据集，作者使用的方法可以获得大规模且高质量的训练数据。其包含417,234个高质量标注表格，并且这些表格所在的文档有着各式各样的领域。
 
-| Task                        | Word    | Latex   | Word+Latex |
-| --------------------------- | ------- | ------- | ---------- |
-| Table detection             | 163,417 | 253,817 | 417,234    |
-| Table structure recognition | 56,866  | 88,597  | 145,463    |
+|            Task             |  Word   |  Latex  | Word+Latex |
+| :-------------------------: | :-----: | :-----: | :--------: |
+|       Table detection       | 163,417 | 253,817 |  417,234   |
+| Table structure recognition | 56,866  | 88,597  |  145,463   |
 
 ### 2.13 DocBank [14]
 
@@ -186,12 +186,12 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 - Word-level：
   - Ground Truth中的标注格式为每个单词有一个边界框；
-  - 对于某个类所有Ground Truth框，若与它IoU最大的Prediction框大于某阈值，则TP个数加1，每个Prediction只能负责一个Ground Truth框；
+  - 对某个类所有Ground Truth框，若与它IoU最大的Prediction框大于某阈值，则TP个数加1，每个Prediction只负责一个Ground Truth框；
   - 在上述基础上计算Precision，Recall和F1。
 
 - Entity-level：
   - Ground Truth中的标注格式为每个实体有一个边界框；
-  - 对于某个类所有Ground Truth框，若与它IoU最大的Prediction框大于某阈值，则TP个数加1，每个Prediction只能负责一个Ground Truth框；
+  - 对某个类所有Ground Truth框，若与它IoU最大的Prediction框大于某阈值，则TP个数加1，每个Prediction只负责一个Ground Truth框；
   - 在上述基础上计算Precision，Recall和F1。
 
 ### Exact Match F1 Score
@@ -200,7 +200,43 @@ Pixel-wise IoU：对于语义分割任务而言，Ground Truth和Prediction都�
 
 ### Edit-Distance Based Accuracy
 
+## 4. 解决方案
 
+### 4.1 概述
+
+​		对IEVRDs任务及其相似任务而言，其解决方案经过了以下几个发展阶段：
+
+- 基于规则的方法
+- 基于统计机器学习的方法
+- 基于深度学习的方法
+
+​		基于规则的方法通常有两种做法：自底向上和自顶向下。自底向上的做法首先基于局部特征（黑/白像素或连通分量）来检测单词，而后连续地将单词组成文字行和段落。然而这样的方法常受限于鉴别结果，并且组合连通分量十分耗时。自顶向下的方法递归地将文档分成列、块、文字行以及单词。使用这些方法无法很好的分割复杂版面的文档。同时，基于规则的方法通常依赖于固定的模板，大大降低了算法的泛化性。
+
+​		基于机器学习的方法：人工神经网络（Artificial Neural Network）、支持向量机（Support Vector Machine）、混合高斯模型（Gaussian Mixture Model）和梯度上升决策树（Gradient Boost Decision Tree）被广泛应用于文档分析与识别并取得了显著成效。除此之外，研究人员也将文档的布局分析视为一个解析问题，并利用基于语法的损失函数来优化全局获取最优解析树。对于机器学习方法来说，它们通常需要花费大量的时间来设计手工构建的特征，并且很难获得高度抽象的上下文语义信息。此外，这些方法通常依赖于视觉线索而忽略了文本信息。
+
+​		近年来，基于深度学习的方法逐渐取代上述两种方法称为主流，理论上，通过堆叠多层神经网络，能够拟合任意函数，且深度学习已经在多领域被证实可行。
+
+​		起初，研究人员大都基于纯粹的图片特征或文字特征开展IEVRDs任务。例如先利用计算机视觉的相关技术（如目标检测）找到感兴趣区域，然后利用OCR技术从这些区域中提取文本；再如先利用OCR技术从文档图片提取出所有文字序列，然后利用NLP相关技术（NER等）进行信息抽取。以上两种方法的缺点在于都只考虑了部分特征，忽略了大量有用的信息。
+
+​		实际上，对于VRDs而言，文档的语义结构不仅依赖于文字本身的含义，而且依赖于整个文档的结构和布局，想要高效地提取信息，必须将图片特征、布局特征和文字特征结合。近年来，研究人员开始尝试用不同的方法将多种特征结合，共同作用，应用于IEVRDs及其相似任务。
+
+### 4.2 常见解决方案
+
+
+
+|             特征构成             |                             论文                             |       时间及会议        |                数据集                 |           评估方案           |  指标  |
+| :------------------------------: | :----------------------------------------------------------: | :---------------------: | :-----------------------------------: | :--------------------------: | :----: |
+|       图片特征<br>结构特征       | **Visual Detection with Context for Document Layout Analysis** | 2019<br>EMNLP<br>IJCNLP |  Self Annotated Scientific Articles   |         mAP(IoU@0.5)         | 70.3%  |
+|       图片特征<br>文本特征       | **Learning to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks** |      2017<br>CVPR       |              ICDAR 2015               |        pixel-wise IoU        | 92.75% |
+|                                  |                                                              |                         |               SectLabel               |              F1              | 89.35% |
+|                                  |                                                              |                         |               DSSE-200                |                              |        |
+|       图片特征<br>文本特征       |       **Chargrid: Towards Understanding 2D Documents**       |      2018<br>EMNLP      |           Private Invoices            | Edit Distance based Accuracy | 62.96% |
+|       图片特征<br>文本特征       | **BERTgrid: Contextualized Embedding for 2D Document Representation and Understanding** |     2019<br>NeurIPS     |                                       |                              |        |
+|       结构特征<br>文本特征       | **Cutie: Learning to understand documents with convolutional universal text information extractor** |      2019<br>CVPR       |                                       |                              |        |
+| 图片特征<br>结构特征<br>文本特征 | **LayoutLM: Pre-training of Text and Layout for Document Image Understanding** |       2020<br>KDD       |                 FUNSD                 |     Word-level F1 Score      | 79.27% |
+|                                  |                                                              |                         |                 SROIE                 |     Exact Match F1 Score     | 95.24% |
+|               其他               | **Graph convolution for multimodal information extraction from visually rich documents** |      2019<br>NAACL      |    Value-Added Tax Invoices (VATI)    |                              |        |
+|                                  |                                                              |                         | International Purchase Receipts (IPR) |                              |        |
 
 ## 4. 基于自然语言处理的语义分割
 
