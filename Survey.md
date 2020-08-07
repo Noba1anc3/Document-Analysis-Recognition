@@ -38,7 +38,6 @@
 ​		语义分割模型的训练需要庞大的训练数据，从2010年开始陆续出现了若干具有一定规模的语义分割数据集。这些数据集有些专注于表格检测的任务，有些致力于版面分割的任务，近一两年来出现了拥有更多细粒度标签的大规模语义分割数据集，诸如PubLayNet和DocBank。随着时间的推移，数据集的制作方式由人工标注转变为基于规则的弱监督生成，数据集的大小与日俱增，训练出来的语义分割模型也随之越来越强大。这使得基于大规模多领域数据集的语义分割预训练模型的设想成为现实[1]。
 
 <div align="center"><img src="http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEOzIanVWLWA8mkhyQMEPUgvn5gKq.t7tPStAGLeHhO*UfgY1iL0uGr9yJMtCFvQr48xpDRPFq2HVwnk..0HK5hw!/r"/></div>
-
 <div align="center"><img src="http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrELLAEF2TedUovX52*rJV3X**4ySrGDKO8llKmhOZjzshvhDUgJB6Y9YoCaYfhtg8E6heJiQjzi0Qebm30KoABHU!/r"/></div>
 
 ### 2.1 FUNSD [2]
@@ -98,7 +97,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ### 2.11 PubLayNet [12]
 
-​		PubLayNet是一个大型文档图像数据集，文档布局同时使用边界框和多边形进行标注。其使用的原始文档是PubMed中心开源数据集，通过自动化对齐PDF解析结果和XML文件来完成对文档的标注。该工作获得了2019年ICDAR的最佳论文奖。
+​		PubLayNet是一个大型文档图像数据集，文档同时使用边界框和多边形进行标注。其使用的原始文档是PubMed中心开源数据集，通过自动化对齐PDF解析结果和XML文件来完成对文档的标注。该工作获得了2019年ICDAR的最佳论文奖。  共含360k张图片，5种标注类别。  
 
 ![publaynet](https://i.loli.net/2020/08/04/3urWMmCeRGLxANj.png) 
 
@@ -128,6 +127,12 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 |     DocBank     | 500,000 |   12   |      ✔       |      ✔      |       ✔       |      ✔      |
 
 ## 3. 评价指标
+
+​		对IEVRDs任务而言，并没有统一的评估指标。不同的任务需求提出的评估方案会大不相同。若只关
+注“关键信息定位”这一子任务，并不关心OCR子任务是否能够正确提取文本，则评估的方案会和CV任务
+的评估方法十分相似，比如说用IoU来衡量提取出来的区域和Ground Truth区域的重叠度；若关注模型
+处理任务的整体能力，那么评估方案就更加侧重于关注最终的结果是否正确。前面四个指标只关注“关
+键信息定位”任务，后面三个指标的关注点在于IEVRDs任务整体。  
 
 ### mAP
 
@@ -214,15 +219,26 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 - 基于统计机器学习的方法
 - 基于深度学习的方法
 
-​		基于规则的方法通常有两种做法：自底向上和自顶向下。自底向上的做法首先基于局部特征（黑/白像素或连通分量）来检测单词，而后连续地将单词组成文字行和段落。然而这样的方法常受限于鉴别结果，并且组合连通分量十分耗时。自顶向下的方法递归地将文档分成列、块、文字行以及单词。使用这些方法无法很好的分割复杂版面的文档。同时，基于规则的方法通常依赖于固定的模板，大大降低了算法的泛化性。
+**基于规则的方法**
 
-​		基于机器学习的方法：人工神经网络（Artificial Neural Network）、支持向量机（Support Vector Machine）、混合高斯模型（Gaussian Mixture Model）和梯度上升决策树（Gradient Boost Decision Tree）被广泛应用于文档分析与识别并取得了显著成效。除此之外，研究人员也将文档的布局分析视为一个解析问题，并利用基于语法的损失函数来优化全局获取最优解析树。对于机器学习方法来说，它们通常需要花费大量的时间来设计手工构建的特征，并且很难获得高度抽象的上下文语义信息。此外，这些方法通常依赖于视觉线索而忽略了文本信息。
+​		基于规则的方法通常有两种做法：自底向上和自顶向下。自底向上的做法首先基于局部特征（黑/白像素或连通分量）检测单词，而后连续地将单词组成文字行和段落。然而这样的方法常受限于鉴别结果，并且组合连通分量十分耗时。自顶向下的方法递归地将文档分成列、块、文字行以及单词。使用这些方法无法很好的分割复杂版面的文档。同时，基于规则的方法通常依赖于固定的模板，大大降低了算法的泛化性。
+
+**基于机器学习的方法**
+
+​		人工神经网络（Artificial Neural Network）、支持向量机（Support Vector Machine）、混合高斯模型（Gaussian Mixture Model）和梯度上升决策树（Gradient Boost Decision Tree）被广泛应用于文档分析与识别并取得了显著成效。除此之外，研究人员也将文档的布局分析视为一个解析问题，并利用基于语法的损失函数来优化全局获取最优解析树。对于机器学习方法来说，它们通常需要花费大量的时间来设计手工构建的特征，并且很难获得高度抽象的上下文语义信息。此外，这些方法通常依赖于视觉线索而忽略了文本信息。
+
+**基于深度学习的方法**
 
 ​		近年来，基于深度学习的方法逐渐取代上述两种方法称为主流，理论上，通过堆叠多层神经网络，能够拟合任意函数，且深度学习已经在多领域被证实可行。
 
 ​		起初，研究人员大都基于纯粹的图片特征或文字特征开展IEVRDs任务。例如先利用计算机视觉的相关技术（如目标检测）找到感兴趣区域，然后利用OCR技术从这些区域中提取文本；再如先利用OCR技术从文档图片提取出所有文字序列，然后利用NLP相关技术（NER等）进行信息抽取。以上两种方法的缺点在于都只考虑了部分特征，忽略了大量有用的信息。
 
-​		实际上，对于VRDs而言，文档的语义结构不仅依赖于文字本身的含义，而且依赖于整个文档的结构和布局，想要高效地提取信息，必须将图片特征、布局特征和文字特征结合。近年来，研究人员开始尝试用不同的方法将多种特征结合，共同作用，应用于IEVRDs及其相似任务。
+​		实际上，对于VRDs而言，文档的语义结构不仅依赖于文字本身的含义，而且依赖于整个文档的结构和布局，想要高效地提取信息，必须将图片特征、结构特征和语义特征结合。近年来，研究人员开始尝试用不同的方法将多种特征结合，共同作用，应用于IEVRDs及其相似任务。
+
+- 视觉特征
+  - 图片特征：通过在原图上不断卷积得到的特征图；
+  - 结构特征：人为选取的特征。例如将图片中文本框的左上和右下坐标作为特征。
+- 语义特征：使用OCR识别出字符或单词或句子，对这类文本元素进行embedding后得到的特征。  
 
 ### 4.2 常见解决方案
 
@@ -235,12 +251,12 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 |                |                                                              |                         |               SectLabel               |              F1              |    89.35%     |
 |                |                                                              |                         |               DSSE-200                |        Pixel-wise IoU        |     75.9%     |
 |   图像+语义    |    **Chargrid: Towards Understanding 2D Documents [19]**     |      2018<br>EMNLP      |           Private Invoices            | Edit Distance based Accuracy |    62.96%     |
-|   图像+语义    | **BERTgrid: Contextualized Embedding for 2D Document Representation and Understanding [20]** |     2019<br>NeurIPS     |                                       |                              |               |
+|   图像+语义    | **BERTgrid: Contextualized Embedding for 2D Document Representation and Understanding [20]** |     2019<br>NeurIPS     |           Private Invoices            | Edit Distance based Accuracy |    65.48%     |
 |   结构+语义    | **Cutie: Learning to understand documents with convolutional universal text information extractor [21]** |      2019<br>CVPR       |                 SROIE                 |     Strict AP / Soft AP      | 86.7% / 92.7% |
 | 图像+语义+结构 | **LayoutLM: Pre-training of Text and Layout for Document Image Understanding [1]** |       2020<br>KDD       |                 FUNSD                 |     Word-level F1 Score      |    79.27%     |
 |                |                                                              |                         |                 SROIE                 |     Exact Match F1 Score     |    95.24%     |
-|      其他      | **Graph convolution for multimodal information extraction from visually rich documents [22]** |      2019<br>NAACL      |    Value-Added Tax Invoices (VATI)    |                              |               |
-|                |                                                              |                         | International Purchase Receipts (IPR) |                              |               |
+|      其他      | **Graph convolution for multimodal information extraction from visually rich documents [22]** |      2019<br>NAACL      |    Value-Added Tax Invoices (VATI)    |     Exact Match F1 Score     |     87.3%     |
+|                |                                                              |                         | International Purchase Receipts (IPR) |     Exact Match F1 Score     |     83.6%     |
 
 ## 5. 基于自然语言处理的语义分割
 
@@ -279,6 +295,8 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 - Table detection using YOLO. ICDAR, 2019.
 
 ![1596419804068]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFuIMA1KftuWbGVyiqGD1NgKgRj5zXHYB1nnuwxYpisFFFPyL.K5C8v.MP2T.GsMxup7Zq7yOh58BkTrqQW*FF4!/r )
+
+### 融合视觉信息与结构信息的方法
 
 #### Visual Detection with Context for Document Layout Analysis [17]
 
@@ -330,33 +348,35 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​		作者提出的MMFCN是一个统一的框架，结合了深度学习模型和启发式规则来同时处理语义分割和表格检测两个任务。其中，预测类别和轮廓检测两个任务作为神经网络框架的两个分支同时训练。而对于后面的条件随机场，其一元项由语义分割网络输出的特征来定义，其成对项由色差和轮廓特征来定义。
 
-### 7.3 融合视觉信息与语义信息的方法
+### 7.3 融合结构信息与语义信息的方法
 
-#### LayoutLM [1]
+#### Cutie: Learning to understand documents with convolutional universal text information extractor [21]
 
-​		LayouLM是结合了文档视觉结构以及文本语义信息的通用文档预训练模型。它在Bert模型基础上添加了2-D Position Embedding 和Image Embedding两种新的Embedding层来有效地结合文档视觉和结构信息。
+ 		该方法并未使用不停卷积图像的方法来获取特征，而是先利用OCR技术进行文字检测识别，根据这些信息构建出某种网格表示，再使用CNN对该网格进行信息抽取，整体的工作流程如下图所示：
 
-- 2-D Position Embedding生成方法：通过OCR获取每个文字行内的所有单词以其边界框坐标(x0, y0, x1, y1)，将文字行内所有单词的(xmin, ymin, xmax, ymax)分别做embedding，这4个embedding结果的和作为最终的2-D Position Embedding；
-- Image Embedding生成方法：采用Faster RCNN对每个单词区域和整张文档图像提取特征；
-- 将2-D Position Embedding通过预训练的Bert得到LayoutLM Embedding，对LayoutLM Embedding和Image Embedding求和得到最终特征，用于开展下游任务。
+![](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEAdFZYY.tmYc6OgiKQnMlSo12pCDDsXWwa0zwz4lhaTisdmkWS7faYlaQo5WqlvFvqvfLaS6AKQufYbW09KodSo!/r)
 
-<img src="https://i.loli.net/2020/08/05/meYX1cswORyoH53.png" width="1000" />
+**在自己构造的数据集上的表现**
+		数据集公含三类文档：Meals Entertainment(ME), Taxi and Hotel. 数据分布情况如下表：
 
-​		在预训练阶段，LayoutLM采用了MVLM遮罩式视觉语言模型和MDC多标签文档分类两个任务，并以IIT-CDIP 数据集作为训练集进行完全预训练。
+|       | Training Set | Testing Set | #classes |
+| :---: | :----------: | :---------: | :------: |
+|  ME   |     1109     |     375     |    9     |
+| Taxi  |     1125     |     375     |    6     |
+| Hotel |     1125     |     375     |    9     |
 
-​		论文将预训练模型迁移到表单理解、票据理解两个下游任务中并且都取得了目前的最佳成绩。
+​		模型在该数据集上的表现
 
-**表单理解（Form Understanding）**
+|      Method       | #Params |    Taxi     |     ME      |    Hotel    |
+| :---------------: | :-----: | :---------: | :---------: | :---------: |
+|     CloudScan     |    -    |   82 / -    |   64 / -    |   60 / -    |
+| BERT for NER [23] |  110M   |  88.1 / -   |  80.1 / -   |  71.7 / -   |
+|      CUTIE-A      |   67M   | 90.8 / 97.2 | 77.7 / 91.4 | 69.5 / 87.8 |
+|      CUTIE-B      |   14M   | 94.0 / 97.3 | 81.5 / 89.7 | 74.6 / 87.0 |
 
-​		在表单理解任务上，使用 FUNSD 作为测试数据集，该数据集中的199个标注文档包含31,485个词和9,707个语义实体。在该数据集上，需要对数据集中的表单进行键值对（key-value）抽取。通过引入位置信息的预训练，LayoutLM 在该任务上取得了显著的提升。实验结果见下表：
 
-<div align="center"><img src="https://i.loli.net/2020/08/05/nSFa2G5V8qAJTd1.png"  width="900" /></div>
 
-**票据理解 （Receipt Understanding）**
-
-​		在票据理解任务中，选择 SROIE 比赛数据集作为数据集，其包含1000张已标注的票据，每张票据标注了company，date，address，total四个语义实体。通过在该数据集上微调，LayoutLM的表现比 RDCL 2019(ICDAR Competition on Recognition of Documents with Complex Layouts) 比赛第一名F1 值高1.2个百分点，达到95.24%。其实验结果如下：
-
-<div align="center"><img src="https://i.loli.net/2020/08/05/QP6Zlcf1HpgYIXh.png"  width="900" /></div>
+### 7.4 融合视觉信息与语义信息的方法
 
 #### Multimodal FCN [18]
 
@@ -367,6 +387,9 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 ![1596342496828]( http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJe5uH5m2Z*KonVNgdT3rR0M6ggR*9wZ0Hf0muFKILbjrUZjXC3e2OuYYSGaBaDwoBj6ODmzUjapkPj.qqQkUl8!/r )
 
 ​	为了解决训练数据的问题，作者提出了一个有效的合成文档生成方式，并用它生成了大规模的预训练数据。进一步地，作者提出了两个无监督任务用于更好的提升模型泛化性。其中，通过重建原始图像，重建任务有助于学到更好的表征；连续性任务鼓励同一区域的像素拥有相似的表征。
+
+**DSSE-200**
+		在DSSE-200上达到达到的最佳效果为Pixel-wise IoU 75.9%。  
 
 **ICDAR 2015数据集上的IoU分数表：**
 
@@ -404,7 +427,68 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 #### Bertgrid [20]
 
-## 8. 参考文献
+  	BERTgrid是在Chargrid基础上提出的。与Chargrid在字符级构建grid不同，BERTgrid是在word-piece level构建grid。并且BERTgrid引入预先训练好的BERT语言模型提取dense contextualized vectors进行 embedding。对于网络结构，BERTgrid与Chargrid一样，采用全卷积的Encoder和Decoder进行语义分割和边框回归。下图为BERTgrid模型的pipeline。
+
+![](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEBDMLrLNeFz4O7ZLoeSlhbDl8z6fUF0EZvgV4eEAXxHTO*mkP9PtaqSfPA5F2vISbmGlg9mXe9krNNOzoQoF8PM!/r)
+
+​	  BERTgrid采用的数据集和Chargrid数据集类似，都是选取12k张发票进行人工标注。评估标准采用基于最小编辑距离的Accuracy。在对发票进行信息抽取这个任务上。BERTgrid相比Chargrid提升了2.5个百分点。同时，作者还将BERTgrid与Chargrid结合，相较于Chargrid提升了3.7个百分点。其实验结果如下：
+
+![](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEKAHR3h2gZoCiUaMIXrnP1oUmirUahK4DLuS0sdbQk5dwMlPMOFAoCM*cIE1F3jKBj8LAhf0RgB39aSBLbJS.O0!/r)
+
+### 融合视觉信息，结构信息与语义信息的方法
+
+#### LayoutLM [1]
+
+​		LayouLM是结合了文档视觉结构以及文本语义信息的通用文档预训练模型。它在Bert模型基础上添加了2-D Position Embedding 和Image Embedding两种新的Embedding层来有效地结合文档视觉和结构信息。
+
+- 2-D Position Embedding生成方法：通过OCR获取每个文字行内的所有单词以其边界框坐标(x0, y0, x1, y1)，将文字行内所有单词的(xmin, ymin, xmax, ymax)分别做embedding，这4个embedding结果的和作为最终的2-D Position Embedding；
+- Image Embedding生成方法：采用Faster RCNN对每个单词区域和整张文档图像提取特征；
+- 将2-D Position Embedding通过预训练的Bert得到LayoutLM Embedding，对LayoutLM Embedding和Image Embedding求和得到最终特征，用于开展下游任务。
+
+<img src="https://i.loli.net/2020/08/05/meYX1cswORyoH53.png" width="1000" />
+
+​		在预训练阶段，LayoutLM采用了MVLM遮罩式视觉语言模型和MDC多标签文档分类两个任务，并以IIT-CDIP 数据集作为训练集进行完全预训练。
+
+​		论文将预训练模型迁移到表单理解、票据理解两个下游任务中并且都取得了目前的最佳成绩。
+
+**表单理解（Form Understanding）**
+
+​		在表单理解任务上，使用 FUNSD 作为测试数据集，该数据集中的199个标注文档包含31,485个词和9,707个语义实体。在该数据集上，需要对数据集中的表单进行键值对（key-value）抽取。通过引入位置信息的预训练，LayoutLM 在该任务上取得了显著的提升。实验结果见下表：
+
+<div align="center"><img src="https://i.loli.net/2020/08/05/nSFa2G5V8qAJTd1.png"  width="900" /></div>
+
+**票据理解 （Receipt Understanding）**
+
+​		在票据理解任务中，选择 SROIE 比赛数据集作为数据集，其包含1000张已标注的票据，每张票据标注了company，date，address，total四个语义实体。通过在该数据集上微调，LayoutLM的表现比 RDCL 2019(ICDAR Competition on Recognition of Documents with Complex Layouts) 比赛第一名F1 值高1.2个百分点，达到95.24%。其实验结果如下：
+
+<div align="center"><img src="https://i.loli.net/2020/08/05/QP6Zlcf1HpgYIXh.png"  width="900" /></div>
+
+## 8.总结
+
+​		对于IEVRDs任务而言，需要用到的特征包括视觉特征和语义特征，视觉特征又可以进一步划分为图片特
+征和结构特征，下面以这三种特征为出发点进行深入探讨。
+
+**三种特征的提取方法**
+
+- 语义特征的提取：一般是对字符、单词或句子做embedding，或者将OCR得到的单行文本块通过单层BiLSTM进行embedding；
+- 图片特征的提取：通过不断卷积得到特征图；
+- 结构特征的提取：人为选择文档结构特征。用的比较多的是文本框的左上和右下坐标，框的长宽比、框与其他框的位置关系、框的面积等。
+
+**特征的组合方法**
+特征组合的方式多种多样，不同的组合方式将从很大程度上决定了模型的表现。主流的组合思想都是保留文档的原有结构，在此基础上加入语义特征，具体方法有以下几种：
+
+- 用OCR提取出图片中的所有文本，对文本做embedding后将文本区域的所有像素点用embedding的结果替换，其余没有文本的位置置零，得到一个高维文本特征图；原图经过多层CNN得到一个特征图；将文本特征图和卷积得到的特征图相加或做concat操作得到新的特征图，在新的特征图上进行后续工作。
+- 以上述步骤相同的方法得到高维文本特征图，直接在该文本特征图上进行后续工作。
+- 使用OCR技术得到图片中所有文本的内容和文本框的位置，对文本内容做embedding得到文本向量。构建一个新的空白网格，基于文本框的位置将文本向量填入这个新的网格中，在此网格上进行后续工作。
+
+**可能的改进方向**
+
+- 文字embedding的方法：embedding可以是基于字符、单词和句子的。同时，不同的embedding算法也可能带来完全不同的结果。例如Bertgrid相比于Chargrid就是在embedding的方法上做出了改进。
+- 选择哪些结构特征：哪些结构特征更加有用，这个问题至今没有准确的答案，文本框的边界坐标、大小、宽高比等都可能是有用的特征。
+- 特征组合的方法：相比于上述两个方向，这个方向更加难以提出新的方案，但既然相加、concat、形成新的网格特征图三种组合方法都能work，表明了特征组合的方法对IEVRDs任务而言是十分重要且有研究空间的。
+- 网络结构：从细节上来说，图像金字塔可能带来效果的提升，空洞卷积替换普通卷积也可能带来效果的提升；从大的方面来说，CNN可以完成这个任务，GCN也能完成这个任务。
+
+## 9. 参考文献
 
 [1] Yiheng Xu, Minghao Li, Lei Cui, Shaohan Huang, Furu Wei and Ming Zhou - **LayoutLM: Pre-training of Text and Layout for Document Image Understanding** -  *ACM SIGKDD Conference on Knowledge Discovery and Data Mining*
 
@@ -450,11 +534,13 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 [22] Xiaojing Liu, Feiyu Gao, Qiong Zhang and Huasha Zhao - **Graph Convolution for Multimodal Information Extraction from Visually Rich Documents** - *NAACL 2019*
 
-[23] D. S. Bloomberg and L. Vincent. - **Document image applications.** - *Morphologie Mathmatique, 2007. 8*
+[23] J. Devlin, M. Chang, K. Lee, and K. Toutanova. - **BERT: pretraining of deep bidirectional transformers for language understanding.** - *CoRR, abs/1810.04805, 2018*  
 
-[24] S. S. Bukhari, F. Shafait, and T. M. Breuel. - **Improved document image segmentation algorithm using multi resolution morphology.** - *In IS&T/SPIE Electronic Imaging, pages 78740D–78740D. International Society for Optics and Photonics, 2011. 8* 
+[24] D. S. Bloomberg and L. Vincent. - **Document image applications.** - *Morphologie Mathmatique, 2007. 8*
 
-[25] F. C. Fernandez and O. R. Terrades. - **Document segmentation using relative location features.** - *In Pattern Recognition (ICPR), 2012 21st International Conference on, pages 1562–1565. IEEE, 2012. 8*
+[25] S. S. Bukhari, F. Shafait, and T. M. Breuel. - **Improved document image segmentation algorithm using multi resolution morphology.** - *In IS&T/SPIE Electronic Imaging, pages 78740D–78740D. International Society for Optics and Photonics, 2011. 8* 
 
-[26] M.-T. Luong, T. D. Nguyen, and M.-Y. Kan. - **Logical structure recovery in scholarly articles with rich document features.** - *Multimedia Storage and Retrieval Innovations for Digital Library Systems, 270, 2012. 2, 6, 8* 
+[26] F. C. Fernandez and O. R. Terrades. - **Document segmentation using relative location features.** - *In Pattern Recognition (ICPR), 2012 21st International Conference on, pages 1562–1565. IEEE, 2012. 8*
+
+[27] M.-T. Luong, T. D. Nguyen, and M.-Y. Kan. - **Logical structure recovery in scholarly articles with rich document features.** - *Multimedia Storage and Retrieval Innovations for Digital Library Systems, 270, 2012. 2, 6, 8* 
 
