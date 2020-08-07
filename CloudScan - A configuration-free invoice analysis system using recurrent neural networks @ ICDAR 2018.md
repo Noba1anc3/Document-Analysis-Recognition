@@ -44,3 +44,5 @@ Baseline是Kaggle竞赛Tradeshift-text-classification的冠军方案
 使用RNN的理由
 - 上下文对于分类每一个N-gram十分重要，然而在逻辑回归当中每个N-gram都是一个孤岛，这使我们需要利用特征工程来capture上下文
 - RNN以一种条理化的方式把整个invoice考虑进来，它免除了我们为了capture上下文所特意去做的特征工程
+
+RNN的输出有65个个逻辑单元，其中32个类可以是Begining或者是Inside，除此之外还有output。
