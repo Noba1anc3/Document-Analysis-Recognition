@@ -352,11 +352,11 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 #### Cutie: Learning to understand documents with convolutional universal text information extractor [21]
 
- 		该方法并未使用不停卷积图像的方法来获取特征，而是先利用OCR技术进行文字检测识别，根据这些信息构建出某种网格表示，再使用CNN对该网格进行信息抽取，整体的工作流程如下图所示：
+​		该方法并未使用不停卷积图像的方法来获取特征，而是先利用OCR技术进行文字检测识别，根据这些信息构建出某种网格表示，再使用CNN对该网格进行信息抽取，整体的工作流程如下图所示：
 
 ![](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEAdFZYY.tmYc6OgiKQnMlSo12pCDDsXWwa0zwz4lhaTisdmkWS7faYlaQo5WqlvFvqvfLaS6AKQufYbW09KodSo!/r)
 
-**在自己构造的数据集上的表现**
+**在自己构造的数据集上的表现**  
 		数据集公含三类文档：Meals Entertainment(ME), Taxi and Hotel. 数据分布情况如下表：
 
 |       | Training Set | Testing Set | #classes |
@@ -388,27 +388,27 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 ​	为了解决训练数据的问题，作者提出了一个有效的合成文档生成方式，并用它生成了大规模的预训练数据。进一步地，作者提出了两个无监督任务用于更好的提升模型泛化性。其中，通过重建原始图像，重建任务有助于学到更好的表征；连续性任务鼓励同一区域的像素拥有相似的表征。
 
-**DSSE-200**
+**DSSE-200**  
 		在DSSE-200上达到达到的最佳效果为Pixel-wise IoU 75.9%。  
 
 **ICDAR 2015数据集上的IoU分数表：**
 
 | Methods             | non-text | text |
 | ------------------- | -------- | ---- |
-| Leptonica [23]      | 84.7     | 86.8 |
-| Bukhari et al. [24] | 90.6     | 90.3 |
+| Leptonica [24]      | 84.7     | 86.8 |
+| Bukhari et al. [25] | 90.6     | 90.3 |
 | Ours (binary)       | 94.5     | 91.0 |
 
 | Methods               | figure | text |
 | --------------------- | ------ | ---- |
-| Fernandez et al. [20] | 70.1   | 85.8 |
+| Fernandez et al. [26] | 70.1   | 85.8 |
 | Ours (binary)         | 77.1   | 91.0 |
 
 **SectLabel数据集上的F1分数表：**
 
 | Methods           | section | caption | list  | para. |
 | ----------------- | ------- | ------- | ----- | ----- |
-| Luong et al. [21] | 0.916   | 0.781   | 0.712 | 0.969 |
+| Luong et al. [27] | 0.916   | 0.781   | 0.712 | 0.969 |
 | Ours              | 0.919   | 0.893   | 0.793 | 0.969 |
 
 #### Chargrid [19]
@@ -427,7 +427,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 
 #### Bertgrid [20]
 
-  	BERTgrid是在Chargrid基础上提出的。与Chargrid在字符级构建grid不同，BERTgrid是在word-piece level构建grid。并且BERTgrid引入预先训练好的BERT语言模型提取dense contextualized vectors进行 embedding。对于网络结构，BERTgrid与Chargrid一样，采用全卷积的Encoder和Decoder进行语义分割和边框回归。下图为BERTgrid模型的pipeline。
+​		BERTgrid是在Chargrid基础上提出的。与Chargrid在字符级构建grid不同，BERTgrid是在word-piece level构建grid。并且BERTgrid引入预先训练好的BERT语言模型提取dense contextualized vectors进行 embedding。对于网络结构，BERTgrid与Chargrid一样，采用全卷积的Encoder和Decoder进行语义分割和边框回归。下图为BERTgrid模型的pipeline。
 
 ![](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEBDMLrLNeFz4O7ZLoeSlhbDl8z6fUF0EZvgV4eEAXxHTO*mkP9PtaqSfPA5F2vISbmGlg9mXe9krNNOzoQoF8PM!/r)
 
@@ -474,7 +474,7 @@ ICDAR RDCL是文档分析与识别国际会议复杂版面文档识别竞赛的�
 - 图片特征的提取：通过不断卷积得到特征图；
 - 结构特征的提取：人为选择文档结构特征。用的比较多的是文本框的左上和右下坐标，框的长宽比、框与其他框的位置关系、框的面积等。
 
-**特征的组合方法**
+**特征的组合方法**  
 特征组合的方式多种多样，不同的组合方式将从很大程度上决定了模型的表现。主流的组合思想都是保留文档的原有结构，在此基础上加入语义特征，具体方法有以下几种：
 
 - 用OCR提取出图片中的所有文本，对文本做embedding后将文本区域的所有像素点用embedding的结果替换，其余没有文本的位置置零，得到一个高维文本特征图；原图经过多层CNN得到一个特征图；将文本特征图和卷积得到的特征图相加或做concat操作得到新的特征图，在新的特征图上进行后续工作。
