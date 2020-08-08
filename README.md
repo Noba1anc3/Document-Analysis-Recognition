@@ -17,6 +17,11 @@ Quality : ⭐
 - [Paper Link](https://www.aclweb.org/anthology/D19-1348.pdf)  
 - [Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/Visual%20Detection%20with%20Context%20for%20Document%20Layout%20Analysis.md)
 
+## Chargrid: Towards Understanding 2D Documents @ EMNLP 2018
+Quality : ⭐⭐
+- [Paper Link](https://arxiv.org/pdf/1809.08799)
+- [Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/Chargrid:%20Towards%20Understanding%202D%20Documents.md)
+
 ## Learning to Extract Semantic Structure from Documents Using Multimodal Fully Convolutional Neural Networks @ CVPR 2017
 Quality : ⭐⭐⭐  
 - [Paper Link](https://arxiv.org/pdf/1706.02337)  
