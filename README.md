@@ -17,6 +17,11 @@ Quality : ⭐
 - [Paper Link](https://www.aclweb.org/anthology/D19-1348.pdf)  
 - [Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/Visual%20Detection%20with%20Context%20for%20Document%20Layout%20Analysis.md)
 
+## BERTgrid @ NeurIPS 2019
+Quality : ⭐⭐  
+- [Paper Link](https://arxiv.org/pdf/1909.04948.pdf)
+- [Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/BERTgrid:%20Contextualized%20Embedding%20for%202D%20Document%20Representation%20and%20Understanding.md)
+
 ## Chargrid: Towards Understanding 2D Documents @ EMNLP 2018
 Quality : ⭐⭐
 - [Paper Link](https://arxiv.org/pdf/1809.08799)
