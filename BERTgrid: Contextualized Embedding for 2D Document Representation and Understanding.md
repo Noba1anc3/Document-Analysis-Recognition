@@ -1,5 +1,11 @@
 ## BERTgrid: Contextualized Embedding for 2D Document Representation and Understanding
 
+### Learned
+
+- Feature Ensemble Learning
+- Use large amount of unlabeled data to train a BERT is similar to the usage of PCA to deduce the dimension of BERT vector from 768 to 128, which also need some domain-related data.
+- Chargrid outperforms Wordgrid
+
 ### Model
 
 [C+BERTgrid] : combines the Chargrid and BERTgrid input representations.  
