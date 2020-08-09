@@ -17,6 +17,11 @@ Quality : ⭐⭐
 - [Paper Link](https://arxiv.org/pdf/1908.07836)  
 - [Implementation](https://github.com/Noba1anc3/Publaynet)
 
+## Cutie: Learning to Understand Documents with Convolutional Universal Text Information Extractor
+Quality :    
+- [Paper Link](https://arxiv.org/pdf/1903.12363)
+- [Paper Documentation]()
+
 ## Visual Detection with Context for Document Layout Analysis @ EMNLP 2019
 Quality : ⭐  
 - [Paper Link](https://www.aclweb.org/anthology/D19-1348.pdf)  
