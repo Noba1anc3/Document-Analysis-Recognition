@@ -20,7 +20,7 @@ Quality : ⭐⭐
 ## Cutie: Learning to Understand Documents with Convolutional Universal Text Information Extractor
 Quality :    
 - [Paper Link](https://arxiv.org/pdf/1903.12363)
-- [Paper Documentation]()
+- [Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/Cutie:%20Learning%20to%20understand%20documents%20with%20convolutional%20universal%20text%20information%20extractor.md)
 
 ## Visual Detection with Context for Document Layout Analysis @ EMNLP 2019
 Quality : ⭐  
