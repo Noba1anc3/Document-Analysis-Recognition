@@ -2,6 +2,11 @@
 - [Survey Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/Survey.md)
 - [Experimental Documentation](https://github.com/Noba1anc3/MFCNN/wiki/Layout-Analysis)
 
+## DocBank: A Benchmark Dataset for Document Layout Analysis @ arXiv:2006.01038
+Quality : ⭐⭐⭐  
+- [Paper Link](https://arxiv.org/pdf/2006.01038)
+- [Paper Documentation](https://github.com/Noba1anc3/Document-Analysis-Recognition/blob/master/DocBank:%20A%20Benchmark%20Dataset%20for%20Document%20Layout%20Analysis.md)
+
 ## LayoutLM: Pre-training of Text and Layout for Document Image Understanding @ KDD 2020
 Quality : ⭐⭐⭐  
 - [Paper Link](https://arxiv.org/pdf/1912.13318)  
