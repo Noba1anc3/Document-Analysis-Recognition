@@ -10,7 +10,7 @@
 
 ​		Document layout analysis can transform **semi-structured** information into a **structured** representation, meanwhile extracting key information from the documents.  
 
-![1596957236920](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596957236920.png)
+![1596957236920](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJaEHxs6Z*ePoKGCrFXw64EltwdbQZFDsYloYn2bdJ4q3JZCkX2bcfPljT.0bOpF0cI3zFd8SgN1RpP4*PtmLrg!/r)
 
 ​		Nowadays, the sota computer vision and NLP models are often built upon the pre-trained models followed by fine-tuning on specific downstream tasks. However, pre-trained models not only require **large-scale unlabeled data** for **self-supervised learning**, but also need **high quality labeled data** for **task-specific fine-tuning** to achieve good performance.
 
@@ -26,7 +26,7 @@
 
 ​		The current DocBank totally includes 5253 documents, where the training set includes 5053 documents and both the validation set and the test set include 100 documents.
 
-![1596957203402](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596957203402.png)
+![1596957203402](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEDqgJHwgeYQbGI2kBf3QQOlolrEUWOqeCIvdbm*d82OMxoukaiA3QisZ6rpbRtb7FvfkZu*d5clyOqbd3bHlrXA!/r)
 
 ### Document Acquisition
 
@@ -69,7 +69,7 @@
 
 ### LayoutLM
 
-![1596963736056](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596963736056.png)
+![1596963736056](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEHWzFbOJf62co*luW1QLjSnhUlFR0ohmhPplnr2aS31aDMIsnJ8Z22ye8OjcQh2D4xXawYj19zAkfGpGscW3IRw!/r)
 
 ​		Note that we use the LayoutLM without image feature embedding because we find that the text and layout already power the pre-trained model.
 
@@ -91,7 +91,7 @@
 
 ​		For each kind of document semantic structure, we calculated their metrics individually.
 
-![1596964376744](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596964376744.png)
+![1596964376744](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEKUip9IqlrMicC.brjS.MRjhfiepCWONjno4euOd89vf6H3kSJdeTt2ltqOUSbMHx1nycyc3xuZMFkqj.Fyafa8!/r)
 
 ### Settings
 
@@ -104,13 +104,13 @@
 
 ### Results
 
-![1596964903583](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596964903583.png)
+![1596964903583](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEJ4rxlXCYBkCrZncDXU6GgZm6eosBkQAmyfHtJRsHIfgGcvDwNFiknFzxliYhW7kfyu*8CoNM2Yd8.Ix9PK1uGw!/r)
 
 ​		As this work is still in progress, we will enlarge the DocBank dataset and update the results in the revised version later.  
 
 ## Case Study
 
-![1596965069947](C:\Users\yi\AppData\Roaming\Typora\typora-user-images\1596965069947.png)
+![1596965069947](http://r.photo.store.qq.com/psc?/V50VqFfH2A6OlZ2gWBDL0uxzNK4WmFgm/TmEUgtj9EK6.7V8ajmQrEFIviifQdZmatelswemCFWlKqaL7eBRui73GuURE5bndMPxXV9q74yfiD0Oj0mxjRJfpdjRAe.gM9mOEfGXSKwo!/r)
 
 ​		For the pre-trained BERT model, we can see some tokens are detected incorrectly, which illustrates that only using text information is still not sufficient for document layout analysis task, and visual information should be considered as well.
 
@@ -118,11 +118,29 @@
 
 ### Rule-based
 
+#### Bottom-up
+
+​		Detect the connected components of black pixels as the basic computational units in document image analysis, and combining them into higher-level structures through different heuristics methods and labeling them according to different structural features.
+
+#### Top-down
+
+- Mask-based texture analysis, Jain and Zhong, 1996
+- Run Length Smearing Algorithm, Wahl, 1982
+- Document projection profile, Shafait and Breuel, 2010
+- X-Y cut algorithm, Nagy and Seth, 1984
+
 ### Conventional Machine Learning
+
+- Dynamic MLP, Baechler, 2013
+- Gradient Shape Feature (GSF), Diem, 2011
+- Scale Invariant Feature Transform (SIFT), Garz, 2010, 2011, 2012
+- Texture Features and geometric features
 
 ### Deep Learning
 
-
+- FCNN with a weight-training loss scheme, Capobianco, 2018
+- Multi-task document layout analysis using CNN, Oliveira, 2018
+- Pixel-by-pixel classification task, Yang, 2017
 
 ## Conclusion
 
