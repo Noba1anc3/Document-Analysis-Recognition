@@ -5,6 +5,8 @@
 Based on the experience of rule-based IE and LightGBM, it is evident that layout information contributes a lot to the semantic representation.  
 Like Right-Below Zone of key-value extraction and the relative positions between words.  
 
+### Multi-label Document Classification
+Based on the experience of MFCNN, it has been seen that the generalization of MFCNN is not big enough, it is essential to judge the type of invoice before use a specific model to inference on it. Therefore, it is important to capture the document-level feature for image classification.
 
 ## Abstract
 Pretraining techniques have been verified successfully in a variety of NLP tasks in recent years.  
