@@ -1,5 +1,11 @@
 # LayoutLM: Pre-training of Text and Layout for Document Image Understanding
 
+## C
+### 2-D position Embedding
+Based on the experience of rule-based IE and LightGBM, it is evident that layout information contributes a lot to the semantic representation.  
+Like Right-Below Zone of key-value extraction and the relative positions between words.  
+
+
 ## Abstract
 Pretraining techniques have been verified successfully in a variety of NLP tasks in recent years.  
 Despite the widespread use of pre-training models for NLP applications, they almost exclusively focus on  
