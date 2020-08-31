@@ -71,7 +71,7 @@ Multi-task Learning Objective
 - Masked Visual-Language Model (MVLM) loss
 - Multi-label Document Classification (MDC) loss
 
-the LayoutLM is pre-trained on the IIT-CDIP Test Collection 1.02,  
+the LayoutLM is pre-trained on the IIT-CDIP Test Collection 1.0,  
 which contains more than 6 million scanned documents with 11 million scanned document images.
 
 We select three benchmark datasets as the downstream tasks to evaluate the performance of the pre-trained LayoutLM.
