@@ -137,6 +137,45 @@ Given a set of scanned documents, we use the document tags to supervise the pre-
 #### Fine-tuning LayoutLM
 The pre-trained LayoutLM model is fine-tuned on three document image understanding tasks
 
+## Experiments
+### Pre-training Dataset
+IIT-CDIP Test Collection 1.0
+
+### Fine-tuning Dataset
+FUNSD Dataset
+- 199 real, fully annotated, scanned forms with 9707 semantic entities and 31485 words
+- 149 training samples and 50 testing samples
+- A list of semantic entities that are interlinked
+- Word level F1 score
+
+SROIE Dataset
+- 626 for training and 347 for testing
+- A list of text lines with bounding boxes
+- Four types of entites : company, date, address, total
+- Exact-match of the entity recognition results in the F1 score
+
+RVL-CDIP Dataset
+- 400000 grayscale images in 16 classes
+- 25000 images per class
+- 320000 training, 40000 validation, 40000 test
+- Resized not more than 1000 pixels of the longest edge
+- Overall classification accuracy
+
+### Document Pre-processing
+Tesseract, an open-source OCR engine.  
+Store the OCR results in hOCR format.
+
+### Model Pre-training
+BERT base : 12-layer Transformer with 768 hidden sizes, 12 attention heads, which contains about 113M parameters  
+BERT large : 24-layer Transformer with 1024 hidden size, 16 attention heads, which contains about 343M parameters  
+15% of the input tokens for prediction  
+replace masked tokens with the [MASK] token 80%, random token 10% and unchanged token 10%.  
+
+Scale the actual coordinate to a virtual coordinate  
+Use the ResNet-101 model as the backbone network in the Faster R-CNN model, which is pretrained on the Visual Genome dataset.
+
+### Task-specific Fine-tuning
+
 ## Related Work
 ### Rule-based Approaches
 The rule-based approaches contain two types of analysis methods : bottom-up and top-down
