@@ -175,6 +175,29 @@ Scale the actual coordinate to a virtual coordinate
 Use the ResNet-101 model as the backbone network in the Faster R-CNN model, which is pretrained on the Visual Genome dataset.
 
 ### Task-specific Fine-tuning
+#### Form Understanding
+This task includes two sub-tasks: semantic labeling and semantic linking
+
+#### Receipt Understanding
+Filling several pre-defined semantic slots
+
+#### Document Image Classification
+
+### Results
+#### Form Understanding
+Evaluate the form understanding task on the FUNSD dataset. Compared to BERT, RoBERTa performs much better on this dataset as it is trained using larger data with more epochs.
+- Model Accuracy
+- LayoutLM(BASE) accuracy with different data and epochs
+- Different initialization methods for BERT base and large
+The result confirms that the pre-training of text and layout is effective for scanned document understanding especially with **low resource settings**.
+
+#### Receipt Understanding
+Evaluate the receipt understanding task on the SROIE dataset.  
+The result verifies that the pre-trained LayoutLM not only performs well on the in-domain dataset (FUNSD) but also outperforms several strong baselines on the **out-of-domain** dataset like SROIE.
+
+#### Document Image Classification
+Evaluate the document image classification task on the RVL-CDIP dataset.  
+Traditionally, image-based classification models with pre-training performs much better than the text-based models.  
 
 ## Related Work
 ### Rule-based Approaches
